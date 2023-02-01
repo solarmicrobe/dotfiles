@@ -1,0 +1,22 @@
+{{ if eq .chezmoi.os "linux" -}}
+brew "zsh"
+{{ end -}}
+{{ if has "personal" .tags -}}
+cask "steam"
+{{ end -}}
+brew "antigen"
+brew "git"
+brew "htop"
+brew "pv"
+brew "jq"
+cask "jetbrains-toolbox"
+cask "1password"
+cask "google-chrome"
+cask "atom"
+cask "spectacle"
+cask "blueutil"
+cask "caffeine"
+brew "sleepwatcher", restart_service: :changed
+{{ if has "hackintosh" .tags -}}
+cask "hackintool"
+{{ end -}}
