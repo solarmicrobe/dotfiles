@@ -1,0 +1,11 @@
+#!/usr/bin/env sh
+{{ if eq .chezmoi.os "darwin" }}
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+{{ else if eq .chezmoi.os "linux" }}
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+{{   if eq .chezmoi.osRelease.id "debian" }}
+# Debian-specific code
+{{   else if eq .chezmoi.osRelease.id "fedora" }}
+# Fedora-specific code
+{{   end }}
+{{ end }}

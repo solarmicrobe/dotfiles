@@ -1,0 +1,10 @@
+{{- $email := promptStringOnce . "email" "Email address" -}}
+{{- $name := promptStringOnce . "name" "Name for git and other things" -}}
+{{- $computerType := promptStringOnce . "Type" "desktop, laptop, container?" -}}
+{{- $ownership := promptStringOnce . "Owner" "personal, work?" -}}
+data:
+  tags:
+    - {{ $computerType | lower | quote }}
+    - {{ $ownership | lower | quote }}
+  email: {{ $email | quote }}
+  name: {{ $name | quote }}
