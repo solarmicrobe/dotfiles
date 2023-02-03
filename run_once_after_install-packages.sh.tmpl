@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 
 # dconf.ini hash: {{ includeTemplate "Brewfile.tmpl" . | sha256sum }}
-brew bundle --no-lock --file={{ joinPath .chezmoi.homeDir "Brewfile" | quote }}
+brew bundle --file={{ joinPath .chezmoi.homeDir "Brewfile" | quote }}
