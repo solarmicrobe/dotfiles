@@ -1,3 +1,4 @@
+tap "noobaa/noobaa"
 {{ if eq .chezmoi.os "linux" -}}
 brew "zsh"
 {{ end -}}
@@ -7,19 +8,24 @@ brew "sleepwatcher", restart_service: :changed
 {{ end -}}
 {{ if has "personal" .tags -}}
 cask "steam"
+cask "google-chrome"
 {{ end -}}
 brew "antigen"
 brew "git"
 brew "htop"
 brew "pv"
 brew "jq"
+brew "mas"
+brew "noobaa"
+brew "kubernetes-cli"
+brew "k9s"
+brew "mysql"
+brew "vitess"
 cask "1password-cli"
-cask "blueutil"
+cask "bluetility"
 {{ if or (has "desktop" .tags) (has "laptop" .tags) -}}
 cask "jetbrains-toolbox"
 cask "1password"
-cask "google-chrome"
-cask "atom"
 cask "spectacle"
 cask "caffeine"
 {{ end -}}
