@@ -67,7 +67,7 @@ IFS="$OIFS"
 export PATH="/usr/local/opt/ansible@2.9/bin:$PATH"
 
 echo "Setup github personal token"
-export HOMEBREW_GITHUB_API_TOKEN=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
+export HOMEBREW_GITHUB_API_TOKEN="{{ onepasswordRead "op://dotfiles/cdvvddh7rrfmtmgpmtay3j7q54/credential"}}"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 echo "Setup sdkman..."
