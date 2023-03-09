@@ -12,6 +12,8 @@ antigen bundle command-not-found
 antigen bundle dmakeienko/azcli
 antigen bundle dannyzen/cf-zsh-autocomplete-plugin
 antigen bundle "MichaelAquilina/zsh-autoswitch-virtualenv"
+antigen bundle "1password"
+antigen bundle "ag"
 
 # Syntax highlighting bundle.
 echo "Load syntax highlighting bundles"
@@ -27,6 +29,14 @@ antigen apply
 
 # Setup up shell
 echo "Set up shell extras"
+
+{{ if has "garmin" .tags -}}
+export VAULT_FORMAT=json
+alias vaultola='export VAULT_ADDR=https://vault-ola.garmin.com;echo \"Logging into $VAULT_ADDR as $USER ...\";vault login -method=ldap username=$USER'
+alias vaultkcg='export VAULT_ADDR=https://vault-kcg.garmin.com;echo \"Logging into $VAULT_ADDR as $USER ...\";vault login -method=ldap username=$USER'
+alias vaultcn1='export VAULT_ADDR=https://vault-cn1.garmin.com;echo \"Logging into $VAULT_ADDR as $USER ...\";vault login -method=ldap username=$USER'
+alias vaultukb='export VAULT_ADDR=https://vault-ukb.garmin.com;echo \"Logging into $VAULT_ADDR as $USER ...\";vault login -method=ldap username=$USER'
+{{ end }}
 
 echo "Set up curltime"
 curltime() {
