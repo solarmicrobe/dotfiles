@@ -5,6 +5,8 @@ tap "derailed/k9s"
 brew "zsh"
 {{ end -}}
 {{ if has "hackintosh" .tags -}}
+brew "python"
+brew "python-tk"
 cask "hackintool"
 brew "sleepwatcher", restart_service: :changed
 {{ end -}}
