@@ -38,7 +38,8 @@ alias vaultcn1='export VAULT_ADDR=https://vault-cn1.garmin.com;echo \"Logging in
 alias vaultukb='export VAULT_ADDR=https://vault-ukb.garmin.com;echo \"Logging into $VAULT_ADDR as $USER ...\";vault login -method=ldap username=$USER'
 {{ end }}
 
-echo "Set up curltime"
+echo "Set up functions"
+# Functions start
 curltime() {
     curl -so /dev/null -w "\
    namelookup:  %{time_namelookup}s\n\
@@ -50,6 +51,14 @@ starttransfer:  %{time_starttransfer}s\n\
 -------------------------\n\
         total:  %{time_total}s\n" "$@"
 }
+
+function mcp { 
+DEST=$1
+shift
+rsync -avz --progress $@ $DEST
+}
+
+# Functions end
 
 # Set the default kube context if present
 DEFAULT_KUBE_CONTEXTS="$HOME/.kube/config"
@@ -75,6 +84,12 @@ do
 done
 IFS="$OIFS"
 export PATH="/usr/local/opt/ansible@2.9/bin:$PATH"
+
+function krun() {
+    cmd="kubectl run -i --tty $(uuidgen) --rm --image=busybox:1.28 --restart=Never -- /bin/sh -c \"$1\""
+    echo "$cmd"
+    eval $cmd
+}
 
 echo "Setup github personal token"
 export HOMEBREW_GITHUB_API_TOKEN="{{ onepasswordRead "op://dotfiles/cdvvddh7rrfmtmgpmtay3j7q54/credential"}}"
