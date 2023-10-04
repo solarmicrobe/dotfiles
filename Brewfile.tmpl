@@ -1,20 +1,54 @@
 tap "noobaa/noobaa"
 tap "planetscale/tap"
 tap "derailed/k9s"
+
+# Requirements for linux
 {{ if eq .chezmoi.os "linux" -}}
 brew "zsh"
 {{ end -}}
+
+# Brew/Bundle requirements
+{{ if and (or (has "desktop" .tags) (has "laptop" .tags)) (eq .chezmoi.os "darwin") -}}
+brew "mas"
+{{ end -}}
+
+# Hackintosh only recipies
 {{ if has "hackintosh" .tags -}}
 brew "python"
 brew "python-tk"
 cask "hackintool"
 brew "sleepwatcher", restart_service: :changed
 {{ end -}}
+
+# Personal only recepies
 {{ if has "personal" .tags -}}
+brew "openshift-cli"
 cask "steam"
 cask "google-chrome"
 cask "folding-at-home"
 {{ end -}}
+
+# Non-server only recepies
+{{ if or (has "desktop" .tags) (has "laptop" .tags) -}}
+cask "jetbrains-toolbox"
+cask "visual-studio-code"
+cask "1password"
+cask "spectacle"
+cask "caffeine"
+cask "sourcetree"
+cask "notion"
+cask "podman-desktop"
+{{ end -}}
+
+#Work only recepies
+{{ if has "work" .tags -}}
+cask "microsoft-outlook"
+cask "manictime"
+cask "adobe-acrobat-reader"
+{{ end -}}
+
+
+# Installed on all dimensions
 brew "antigen"
 brew "git"
 cask "git-credential-manager"
@@ -24,10 +58,8 @@ brew "jq"
 brew "mas"
 brew "noobaa"
 brew "podman"
-cask "podman-desktop"
 brew "kubernetes-cli"
 brew "krew"
-brew "openshift-cli"
 brew "k9s"
 brew "dive"
 brew "mysql"
@@ -36,16 +68,3 @@ brew "terminal-notifier"
 brew "terraform"
 cask "1password-cli"
 cask "bluetility"
-{{ if or (has "desktop" .tags) (has "laptop" .tags) -}}
-cask "jetbrains-toolbox"
-cask "visual-studio-code"
-cask "1password"
-cask "spectacle"
-cask "caffeine"
-cask "sourcetree"
-{{ end -}}
-{{ if has "work" .tags -}}
-cask "microsoft-outlook"
-cask "manictime"
-cask "adobe-acrobat-reader"
-{{ end -}}
