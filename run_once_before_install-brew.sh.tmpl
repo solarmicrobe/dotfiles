@@ -1,4 +1,11 @@
 #!/usr/bin/env sh
+
+if command -v brew
+then
+  echo "Brew found, no install neccessary..."
+  exit 0
+fi
+
 {{ if eq .chezmoi.os "darwin" }}
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 {{ else if eq .chezmoi.os "linux" }}
