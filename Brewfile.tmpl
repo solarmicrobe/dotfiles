@@ -1,6 +1,7 @@
 tap "derailed/k9s"
 tap "noobaa/noobaa"
 tap "planetscale/tap"
+tap "microsoft/mssql-release", "https://github.com/Microsoft/homebrew-mssql-release"
 
 # Requirements for linux
 {{ if eq .chezmoi.os "linux" -}}
@@ -45,7 +46,9 @@ mas "Clocker", id: 1056643111
 #Work only recepies
 {{ if has "work" .tags -}}
 brew "angular-cli"
+brew "mssql-tools"
 cask "adobe-acrobat-reader"
+cask "dbeaver-community"
 cask "manictime"
 cask "microsoft-outlook"
 {{ end -}}
