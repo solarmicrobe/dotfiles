@@ -1,3 +1,11 @@
+# Source antidote
+echo "Source antidote"
+source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
+
+# initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
+echo "ZDOTDIR: ${ZDOTDIR:-~}"
+antidote load
+
 # Homebrew setup
 if [ -d "/opt/homebrew" ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -7,36 +15,8 @@ elif [ -d "/home/linuxbrew" ]; then
   eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 fi
 
-
- 
-# Load the oh-my-zsh's library.
-echo "Source antigen"
-source /opt/homebrew/share/antigen/antigen.zsh
-antigen use oh-my-zsh
-
-# Bundles from the default repo (robbyrussell's oh-my-zsh).
-echo "Load antigen bundles"
-antigen bundle git
-antigen bundle kubectl
-antigen bundle minikube
-antigen bundle command-not-found
-antigen bundle dmakeienko/azcli
-antigen bundle dannyzen/cf-zsh-autocomplete-plugin
-antigen bundle "MichaelAquilina/zsh-autoswitch-virtualenv"
-antigen bundle "1password"
-antigen bundle "ag"
-
-# Syntax highlighting bundle.
-echo "Load syntax highlighting bundles"
-antigen bundle zsh-users/zsh-syntax-highlighting
-
-# Load the theme.
-echo "Load antigen theme"
-antigen theme gnzh
-
-# Tell Antigen that you're done.
-echo "Antigen apply"
-antigen apply
+# Custom alias
+alias docker="lima nerdctl"
 
 # Setup up shell
 echo "Set up shell extras"
@@ -50,7 +30,7 @@ alias vaultukb='export VAULT_ADDR=https://vault-ukb.garmin.com;echo \"Logging in
 {{ end }}
 
 echo "Set up functions"
-# Functions start
+# curl with time output
 curltime() {
     curl -so /dev/null -w "\
    namelookup:  %{time_namelookup}s\n\
@@ -63,14 +43,25 @@ starttransfer:  %{time_starttransfer}s\n\
         total:  %{time_total}s\n" "$@"
 }
 
-function mcp { 
-DEST=$1
-shift
-rsync -avz --progress $@ $DEST
-}
+# Rsync destination first
+if command -v rsync > /dev/null ; then
+  function mcp { 
+    DEST=$1
+    shift
+    rsync -avz --progress $@ $DEST
+  }
+fi
 
-# Functions end
+if command -v kubectl > /dev/null; then
+  function krun() {
+    cmd="kubectl run -i --tty $(uuidgen) --rm --image=busybox:1.28 --restart=Never -- /bin/sh -c \"$1\""
+    echo "$cmd"
+    eval $cmd
+  }
+fi
 
+
+echo "Set up KUBECONFIG"
 # Set the default kube context if present
 DEFAULT_KUBE_CONTEXTS="$HOME/.kube/config"
 if test -f "${DEFAULT_KUBE_CONTEXTS}"
@@ -78,8 +69,6 @@ then
   export KUBECONFIG="$DEFAULT_KUBE_CONTEXTS"
 fi
 
-
-echo "Set up KUBECONFIG"
 # Additional contexts should be in ~/.kube/custom-contexts/ 
 CUSTOM_KUBE_CONTEXTS="$HOME/.kube/custom-contexts"
 mkdir -p "${CUSTOM_KUBE_CONTEXTS}"
@@ -96,14 +85,15 @@ done
 IFS="$OIFS"
 export PATH="/usr/local/opt/ansible@2.9/bin:$PATH"
 
-function krun() {
-    cmd="kubectl run -i --tty $(uuidgen) --rm --image=busybox:1.28 --restart=Never -- /bin/sh -c \"$1\""
-    echo "$cmd"
-    eval $cmd
-}
 
 echo "Setup github personal token"
 export HOMEBREW_GITHUB_API_TOKEN="{{ onepasswordRead "op://dotfiles/cdvvddh7rrfmtmgpmtay3j7q54/credential"}}"
+
+# Setting up nvm
+echo "Set up nvm"
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+# [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 echo "Setup sdkman..."
