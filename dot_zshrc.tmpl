@@ -5,6 +5,7 @@ source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
 # initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
 echo "ZDOTDIR: ${ZDOTDIR:-~}"
 antidote load
+setopt promptsubst
 
 # Homebrew setup
 if [ -d "/opt/homebrew" ]; then
