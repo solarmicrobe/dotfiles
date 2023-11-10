@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+for f in `ls /var/run/limactl.*.wakeup`; then
+    vm=$(echo "$f" | | cut -d "." -f 2)
+    if limactl start "$vm"; then
+        rm $f
+    fi
+done

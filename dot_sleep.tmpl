@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+{{ if and (eq .chezmoi.os "darwin") (eq .chezmoi.arch "arm64") -}}
+for vm in `limactl list --json | jq -r '. | select(.vmType=="vz") | .name'`; do
+    if limactl stop; then
+        touch "/var/run/limactl.$vm.wakeup"
+    fi  
+done
+{{ end -}}
