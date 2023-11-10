@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+if [ -d ~/.vim_runtime ]; then
+    cd ~/.vim_runtime
+    git checkout main
+    git pull
+else
+    git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+fi
+sh ~/.vim_runtime/install_awesome_vimrc.sh
