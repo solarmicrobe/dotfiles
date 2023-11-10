@@ -17,7 +17,6 @@ brew "mas"
 {{ if has "hackintosh" .tags -}}
 brew "python"
 brew "python-tk"
-brew "sleepwatcher", restart_service: :changed
 cask "hackintool"
 {{ end -}}
 
@@ -31,6 +30,7 @@ cask "steam"
 
 # Non-server only recepies
 {{ if or (has "desktop" .tags) (has "laptop" .tags) -}}
+brew "sleepwatcher", restart_service: :changed
 cask "1password"
 cask "caffeine"
 cask "devtoys"
@@ -78,5 +78,4 @@ brew "terraform"
 brew "vitess"
 cask "1password-cli"
 cask "bluetility"
-cask "fig"
 cask "git-credential-manager"
