@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+{{ range $file := glob "src/macos-automations/usr/local/bin/*"  -}}
+# {{ $file }} hash: {{ includeTemplate $file . | sha256sum }}
+cp {{ $file }} /usr/local/bin/{{ $file | base}}
+{{ end }}
