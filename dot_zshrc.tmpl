@@ -60,6 +60,7 @@ if command -v kubectl > /dev/null; then
     eval $cmd
   }
 fi
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 
 echo "Set up KUBECONFIG"
