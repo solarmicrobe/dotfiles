@@ -23,10 +23,10 @@ cask "hackintool"
 # Personal only recepies
 {{ if has "personal" .tags -}}
 brew "openshift-cli"
-brew "tailscale"
 cask "folding-at-home"
 cask "google-chrome"
 cask "steam"
+mas "tailscale", id: 1475387142
 {{ end -}}
 
 # Non-server only recepies
@@ -43,6 +43,7 @@ cask "sourcetree"
 cask "spectacle"
 cask "visual-studio-code"
 mas "Clocker", id: 1056643111
+mas "Slack", id: 803453959
 {{ end -}}
 
 
@@ -75,6 +76,7 @@ brew "node"
 brew "noobaa"
 brew "podman"
 brew "pv"
+brew "the_silver_searcher"
 brew "terminal-notifier"
 brew "terraform"
 brew "vitess"
