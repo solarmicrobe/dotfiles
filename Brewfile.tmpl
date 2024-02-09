@@ -22,6 +22,7 @@ cask "hackintool"
 
 # Personal only recepies
 {{ if has "personal" .tags -}}
+brew "libvirt", restart_service: :changed
 brew "openshift-cli"
 cask "folding-at-home"
 cask "google-chrome"
