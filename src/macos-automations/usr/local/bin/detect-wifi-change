@@ -1,7 +1,7 @@
-#!/usr/bin/env bash
+#!/usr/bin/env bash -ex
 
 
-if [[ $(networksetup -getairportnetwork en0) == "Current Wi-Fi Network: parksfamily" ]]; then
+if [[ "$(networksetup -getairportnetwork en0)" = "Current Wi-Fi Network: parksfamily" ]]; then
     networksetup -setdnsservers Wi-Fi 10.0.5.3 10.0.0.1
 else
     networksetup -setdnsservers Wi-Fi "Empty"
