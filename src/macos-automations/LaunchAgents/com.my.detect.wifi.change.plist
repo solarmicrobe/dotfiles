@@ -6,7 +6,6 @@
         <string>com.my.detect.wifi.change</string>
     <key>ProgramArguments</key>
     <array>
-        <string>/bin/sh</string>
         <string>/usr/local/bin/detect-wifi-change</string>
     </array>
     <key>WatchPaths</key>
