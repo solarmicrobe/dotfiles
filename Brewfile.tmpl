@@ -22,7 +22,7 @@ cask "hackintool"
 
 # Personal only recepies
 {{ if has "personal" .tags -}}
-tap planetscale/tap/pscale
+tap "planetscale/tap/pscale"
 brew "libvirt", restart_service: :changed
 brew "noobaa"
 brew "openshift-cli"
