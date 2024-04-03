@@ -1,6 +1,6 @@
 # Source antidote
 echo "Source antidote"
-source /opt/homebrew/opt/antidote/share/antidote/antidote.zsh
+source $(brew --prefix)/share/antidote/antidote.zsh
 
 # initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
 echo "ZDOTDIR: ${ZDOTDIR:-~}"
@@ -101,6 +101,9 @@ export NVM_DIR="$HOME/.nvm"
 if which -s dotnet; then
     export PATH="${HOME}/.dotnet/tools/:${PATH}"
 fi
+
+# Setting up python for Monteray 12.3 and above
+export PATH="/usr/local/opt/python@3.11/libexec/bin:$PATH"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 echo "Setup sdkman..."
