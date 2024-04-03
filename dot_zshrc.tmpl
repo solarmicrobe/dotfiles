@@ -89,7 +89,8 @@ export PATH="/usr/local/opt/ansible@2.9/bin:$PATH"
 
 
 echo "Setup github personal token"
-export HOMEBREW_GITHUB_API_TOKEN="{{ onepasswordRead "op://dotfiles/cdvvddh7rrfmtmgpmtay3j7q54/credential"}}"
+export GITHUB_PAT="{{ onepasswordRead "op://dotfiles/cdvvddh7rrfmtmgpmtay3j7q54/credential"}}"
+export HOMEBREW_GITHUB_API_TOKEN=${GITHUB_PAT}
 
 # Setting up nvm
 echo "Set up nvm"
