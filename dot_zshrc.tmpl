@@ -2,6 +2,12 @@
 echo "Source antidote"
 source $(brew --prefix)/share/antidote/antidote.zsh
 
+# initialize vars used by plugins
+# in ~/.zshrc, before Oh My Zsh is sourced:
+export ZSH_DOTENV_ALLOWED_LIST=~/.cache/dotenv-allowed.list
+export ZSH_DOTENV_DISALLOWED_LIST=~/.cache/dotenv-disallowed.list
+export ZSH_CACHE_DIR=~/.cache
+
 # initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
 echo "ZDOTDIR: ${ZDOTDIR:-~}"
 antidote load
