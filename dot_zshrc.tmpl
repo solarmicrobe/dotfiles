@@ -26,6 +26,11 @@ setopt promptsubst
 # Setup up shell
 echo "Set up shell extras"
 
+# Additional alias not in completions
+# Git
+alias gdours="git diff REBASE_HEAD~ HEAD"
+alias gdthiers="git diff REBASE_HEAD~ REBASE_HEAD"
+
 {{ if has "garmin" .tags -}}
 export VAULT_FORMAT=json
 alias vaultola='export VAULT_ADDR=https://vault-ola.garmin.com;echo \"Logging into $VAULT_ADDR as $USER ...\";vault login -method=ldap username=$USER'
