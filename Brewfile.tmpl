@@ -3,13 +3,8 @@ tap "noobaa/noobaa"
 tap "planetscale/tap"
 tap "microsoft/mssql-release", "https://github.com/Microsoft/homebrew-mssql-release"
 
-# Requirements for linux
-{{ if eq .chezmoi.os "linux" -}}
-brew "zsh"
-{{ end -}}
-
 # Brew/Bundle requirements
-{{ if and (or (has "desktop" .tags) (has "laptop" .tags)) (eq .chezmoi.os "darwin") -}}
+{{ if or (has "desktop" .tags) (has "laptop" .tags) -}}
 brew "mas"
 {{ end -}}
 
