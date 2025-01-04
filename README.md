@@ -11,5 +11,6 @@ Other tags:
 * [workplace] - For use when a tool might be extremely specific to a company and might not carry forward to another job
 ## MacOS
 ```bash
+xcode-select --install
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply $GITHUB_USERNAME
 ```
