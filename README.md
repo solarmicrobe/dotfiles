@@ -12,5 +12,9 @@ Other tags:
 ## MacOS
 ```bash
 xcode-select --install
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply $GITHUB_USERNAME
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew install chezmoi 1password-cli
+brew install --cask 1password
+eval "$(/opt/homebrew/bin/brew shellenv)"
+chezmoi
 ```
