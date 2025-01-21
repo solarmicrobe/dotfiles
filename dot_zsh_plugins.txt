@@ -3,7 +3,6 @@ sorin-ionescu/prezto path:modules/completion
 
 # OMZ plugins
 ohmyzsh/ohmyzsh path:lib
-ohmyzsh/ohmyzsh path:plugins/ag/_ag
 ohmyzsh/ohmyzsh path:plugins/ansible
 ohmyzsh/ohmyzsh path:plugins/argocd
 ohmyzsh/ohmyzsh path:plugins/aws
@@ -26,7 +25,7 @@ ohmyzsh/ohmyzsh path:plugins/npm
 ohmyzsh/ohmyzsh path:plugins/nvm
 ohmyzsh/ohmyzsh path:plugins/oc
 ohmyzsh/ohmyzsh path:plugins/operator-sdk
-ohmyzsh/ohmyzsh path:plugins/1password
+#ohmyzsh/ohmyzsh path:plugins/1password
 ohmyzsh/ohmyzsh path:plugins/pip
 ohmyzsh/ohmyzsh path:plugins/podman
 ohmyzsh/ohmyzsh path:plugins/python

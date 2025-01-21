@@ -1,0 +1,8 @@
+#!/usr/bin/env zsh
+
+{{ if eq .chezmoi.os "darwin" -}}
+# .zsh_plugins.txt hash: {{ include "dot_zsh_plugins.txt" | sha256sum }}
+echo "Update antidote zsh plugins"
+source $(brew --prefix)/share/antidote/antidote.zsh
+antidote bundle <~/.zsh_plugins.txt >~/.zsh_plugins.zsh
+{{ end }}

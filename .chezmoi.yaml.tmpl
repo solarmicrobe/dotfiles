@@ -1,10 +1,31 @@
-{{- $email := promptStringOnce . "email" "Email address" -}}
-{{- $name := promptStringOnce . "name" "Name for git and other things" -}}
-{{- $computerType := promptStringOnce . "Type" "desktop, laptop, server, container" -}}
-{{- $ownership := promptStringOnce . "Owner" "personal, work" -}}
+{{- $email := promptStringOnce . "email" "Email address?" -}}
+{{- $name := promptStringOnce . "name" "Full Name? (for git and other things)" -}}
+{{- $chassisType := promptStringOnce . "Chassis type?" "desktop, laptop, vm, server, container" -}}
+{{- $emailClient := promptStringOnce . "Email client?" "Mail, Outlook" -}}
+{{- $purpose := promptStringOnce . "Purpose" "personal, work, consulting" -}}
+{{- $cloud := promptStringOnce . "Install cloud cli tools?" "aws, azure, all, none" -}}
+{{- $containers := promptBoolOnce . "containers" "Working with containers?" -}}
+{{- $kubernetes := promptBoolOnce . "kubernetes" "Manage k8s?" -}}
+{{- $developer := promptBoolOnce . "developer" "Developing on this chassis?" -}}
 data:
   tags:
-    - {{ $computerType | lower | quote }}
-    - {{ $ownership | lower | quote }}
+{{- if or (eq $cloud "aws") (eq $cloud "all") }}
+    - aws
+{{- end }}
+{{- if or (eq $cloud "azure") (eq $cloud "all") }}
+    - azure
+{{- end }}
+{{- if $developer }}
+    - developer
+{{- end }}
+{{- if $containers }}
+    - container-tools
+{{- end }}
+{{- if $kubernetes }}
+    - kubernetes
+{{- end }}
   email: {{ $email | quote }}
   name: {{ $name | quote }}
+  emailClient: {{ $emailClient | lower | quote }}
+  purpose: {{ $purpose | lower | quote }}
+  chassisType: {{ $chassisType | lower | quote }}

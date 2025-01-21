@@ -1,85 +1,114 @@
-tap "derailed/k9s"
-tap "noobaa/noobaa"
-tap "planetscale/tap"
-tap "microsoft/mssql-release", "https://github.com/Microsoft/homebrew-mssql-release"
-
 # Brew/Bundle requirements
-{{ if or (has "desktop" .tags) (has "laptop" .tags) -}}
+{{- if or (eq .chassisType "desktop") (eq .chassisType "laptop") }}
 brew "mas"
-{{ end -}}
+{{- end }}
+
+# Developer tools
+{{- if has "developer" .tags }}
+tap "microsoft/mssql-release", "https://github.com/Microsoft/homebrew-mssql-release"
+tap "planetscale/tap"
+brew "mssql-tools"
+brew "mysql"
+brew "nvm"
+brew "pscale"
+brew "terraform"
+brew "vitess"
+{{- if or (eq .chassisType "desktop") (eq .chassisType "laptop") }}
+cask "devtoys"
+cask "dbeaver-community"
+cask "jetbrains-toolbox"
+cask "morgen"
+cask "sourcetree"
+cask "visual-studio-code"
+cask "warp"
+#mas "AmorphousDiskMark", id: 1168254295
+{{- end }}
+{{- end }}
 
 # Hackintosh only recipies
-{{ if has "hackintosh" .tags -}}
+{{- if has "hackintosh" .tags }}
 brew "python"
 brew "python-tk"
 cask "hackintool"
-{{ end -}}
+{{- else }}
+# This is not a Hackintosh
+{{- end }}
 
 # Personal only recepies
-{{ if has "personal" .tags -}}
+{{- if or (eq .purpose "personal") (eq .purpose "consulting") }}
+tap "noobaa/noobaa"
 brew "libvirt", restart_service: :changed
 brew "noobaa"
-brew "openshift-cli"
-brew "pscale"
 brew "tailscale"
-brew "vitess"
-cask "folding-at-home"
 cask "google-chrome"
-cask "steam"
 mas "tailscale", id: 1475387142
-{{ end -}}
+{{- end }}
 
-# Non-server only recepies
-{{ if or (has "desktop" .tags) (has "laptop" .tags) -}}
+# GUI only recepies
+{{- if or (eq .chassisType "desktop") (eq .chassisType "laptop") }}
+brew "diskonaut"
 brew "sleepwatcher", restart_service: :changed
+brew "terminal-notifier"
 cask "1password"
+cask "bluetility"
 cask "caffeine"
-cask "devtoys"
+cask "cyberduck"
 cask "expandrive"
-cask "jetbrains-toolbox"
+cask "git-credential-manager"
 cask "notion"
+{{- if has "container-tools" .tags }}
 cask "podman-desktop"
-cask "sourcetree"
-cask "spectacle"
-cask "visual-studio-code"
+{{- end }}
+cask "rectangle"
 mas "Clocker", id: 1056643111
 mas "Slack", id: 803453959
-{{ end -}}
+{{- end }}
 
 
 # Work only recepies
-{{ if has "work" .tags -}}
-brew "mssql-tools"
+{{- if or (eq .purpose "work" ) (eq .purpose "consulting" ) }}
 cask "adobe-acrobat-reader"
-cask "dbeaver-community"
 cask "manictime"
-cask "microsoft-outlook"
-{{ end -}}
+{{- end }}
 
+# Installed by tag
+{{- if has "azure" .tags }}
+brew "azure-cli"
+{{- end }}
+{{- if has "aws" .tags }}
+brew "awscli"
+{{- end }}
+{{- if has "container-tools" .tags }}
+brew "podman"
+brew "dive"
+{{- end }}
+{{- if has "kubernetes" .tags }}
+tap "derailed/k9s"
+brew "kubernetes-cli"
+brew "k9s"
+brew "krew"
+brew "openshift-cli"
+brew "helm"
+brew "tektoncd-cli"
+{{- end }}
+
+# Email client
+{{- if eq .emailClient "outlook" }}
+cask "microsoft-outlook"
+{{- else if and (eq .chezmoi.os "darwin") (eq .emailClient "mail") }}
+# Using Mail
+{{- else }}
+# Incorrect emailClient setting "{{ .emailClient }}"
+{{- end }}
 
 # Installed on all dimensions
 brew "antigen"
 brew "antidote"
-brew "azure-cli"
-brew "awscli"
 brew "direnv"
-brew "diskonaut"
-brew "dive"
 brew "git"
 brew "htop"
 brew "jq"
-brew "k9s"
-brew "krew"
-brew "kubernetes-cli"
-brew "mas"
-brew "mysql"
-brew "nvm"
-brew "podman"
+brew "pygments"
 brew "pv"
 brew "the_silver_searcher"
-brew "terminal-notifier"
-brew "terraform"
 brew "watch"
-cask "1password-cli"
-cask "bluetility"
-cask "git-credential-manager"

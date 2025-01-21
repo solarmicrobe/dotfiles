@@ -19,8 +19,7 @@ echo "Source antidote"
 source $(brew --prefix)/share/antidote/antidote.zsh
 
 # initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
-echo "ZDOTDIR: ${ZDOTDIR:-~}"
-antidote load
+source ~/.zsh_plugins.zsh
 setopt promptsubst
 
 # Setup up shell

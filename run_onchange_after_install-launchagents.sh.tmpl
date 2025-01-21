@@ -1,7 +1,0 @@
-#!/usr/bin/env sh
-
-{{ range $file := glob "src/macos-automations/LaunchAgents/*.plist"  -}}
-# {{ $file }} hash: {{ includeTemplate $file . | sha256sum }}
-cp {{ $file }} ~/Library/LaunchAgents/{{ $file | base}}
-launchctl load ~/Library/LaunchAgents/{{ $file | base }}
-{{ end }}
