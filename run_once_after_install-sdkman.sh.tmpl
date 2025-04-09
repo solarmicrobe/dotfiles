@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+{{ if eq .chezmoi.os "darwin" }}
+curl -s "https://get.sdkman.io" | bash
+{{ end }}
