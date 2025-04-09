@@ -94,7 +94,7 @@ brew "tektoncd-cli"
 
 # Email client
 {{- if eq .emailClient "outlook" }}
-cask "microsoft-outlook"
+mas "microsoft-outlook", id: 985367838
 {{- else if and (eq .chezmoi.os "darwin") (eq .emailClient "mail") }}
 # Using Mail
 {{- else }}
