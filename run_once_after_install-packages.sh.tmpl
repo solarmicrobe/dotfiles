@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 
+export HOMEBREW_ACCEPT_EULA=Y 
 {{ if eq .chezmoi.os "darwin" }}
 # Brewfile hash: {{ includeTemplate "Brewfile.tmpl" . | sha256sum }}
 brew bundle --file={{ joinPath .chezmoi.homeDir "Brewfile" | quote }}
