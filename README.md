@@ -16,9 +16,9 @@ Other tags:
 ```bash
 xcode-select --install
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 brew install chezmoi 1password-cli
 brew install --cask 1password
-eval "$(/opt/homebrew/bin/brew shellenv)"
 chezmoi init solarmicrobe/dotfiles
 ```
 

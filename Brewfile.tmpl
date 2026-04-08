@@ -16,7 +16,6 @@ brew "vitess"
 {{- if or (eq .chassisType "desktop") (eq .chassisType "laptop") }}
 cask "devtoys"
 cask "dbeaver-community"
-cask "jetbrains-toolbox"
 cask "morgen"
 cask "sourcetree"
 cask "visual-studio-code"
@@ -39,9 +38,10 @@ cask "hackintool"
 tap "noobaa/noobaa"
 brew "libvirt", restart_service: :changed
 brew "noobaa"
-brew "tailscale"
-cask "google-chrome"
-mas "tailscale", id: 1475387142
+cask "codex"
+cask "codex-app"
+{{- else }}
+# This is not a personal machine
 {{- end }}
 
 # GUI only recepies
@@ -52,6 +52,7 @@ brew "terminal-notifier"
 cask "1password"
 cask "bluetility"
 cask "caffeine"
+cask "google-chrome"
 cask "cyberduck"
 cask "expandrive"
 cask "git-credential-manager"
@@ -67,7 +68,8 @@ mas "Slack", id: 803453959
 
 # Work only recepies
 {{- if or (eq .purpose "work" ) (eq .purpose "consulting" ) }}
-cask "adobe-acrobat-reader"
+cask "claude"
+cask "claude-code"
 cask "manictime"
 {{- end }}
 
@@ -97,6 +99,8 @@ brew "tektoncd-cli"
 mas "microsoft-outlook", id: 985367838
 {{- else if and (eq .chezmoi.os "darwin") (eq .emailClient "mail") }}
 # Using Mail
+{{- else if eq .emailClient "unmanaged" }}
+# Mail client is unmanaged
 {{- else }}
 # Incorrect emailClient setting "{{ .emailClient }}"
 {{- end }}
