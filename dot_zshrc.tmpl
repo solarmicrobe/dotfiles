@@ -101,6 +101,10 @@ echo "Setup github personal token"
 export GITHUB_PAT="{{ onepasswordRead "op://dotfiles/cdvvddh7rrfmtmgpmtay3j7q54/credential"}}"
 {{ else if eq .purpose "work" -}}
 export GITHUB_PAT="{{onepasswordRead "op://PrePass/ezvwfyajckgkgvalnkh3yj66ya/credential" }}"
+
+# Dotnet github envvars
+export GITHUB_ACTOR=Russell-Park_prepass
+export GITHUB_TOKEN="$GITHUB_PAT"
 {{ end -}}
 export HOMEBREW_GITHUB_API_TOKEN=${GITHUB_PAT}
 
