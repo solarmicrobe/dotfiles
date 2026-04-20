@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+export NVM_LATEST="{{(gitHubLatestTag "nvm-sh/nvm").Name}}"
+export PROFILE=/dev/null
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_LATEST}/install.sh | bash
