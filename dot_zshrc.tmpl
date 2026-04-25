@@ -130,6 +130,9 @@ fi
 # Setting up python for Monteray 12.3 and above
 export PATH="/usr/local/opt/python@3.11/libexec/bin:$PATH"
 
+# Setting up path for local custom scripts
+export PATH="$PATH:$HOME/.local/bin"
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 echo "Setup sdkman..."
 export SDKMAN_DIR="$HOME/.sdkman"
