@@ -70,6 +70,14 @@ if command -v kubectl > /dev/null; then
 fi
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
+# Use claude in a tempdir
+if command -v claude > /dev/null; then
+tmpclaude () {
+     export TMPDIR=$(mktemp -dt claude)
+     cd $TMPDIR
+     claude
+ }
+ fi
 
 echo "Set up KUBECONFIG"
 # Set the default kube context if present
@@ -103,7 +111,7 @@ export GITHUB_PAT="{{ onepasswordRead "op://dotfiles/cdvvddh7rrfmtmgpmtay3j7q54/
 export GITHUB_PAT="{{onepasswordRead "op://PrePass/ezvwfyajckgkgvalnkh3yj66ya/credential" }}"
 
 # Dotnet github envvars
-export GITHUB_ACTOR=Russell-Park_prepass
+export GITHUB_ACTOR="{{ .githubActor }}"
 export GITHUB_TOKEN="$GITHUB_PAT"
 {{ end -}}
 export HOMEBREW_GITHUB_API_TOKEN=${GITHUB_PAT}
