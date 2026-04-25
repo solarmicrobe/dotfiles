@@ -1,16 +1,16 @@
 [init]
         defaultBranch = master
 [user]
-        name = {{ .name }}
-        email = {{ .email }}
+	name = {{ .name }}
+	email = {{ .email }}
 [core]
-        excludesfile = /Users/russellparks/.gitignore_global
+	excludesfile = /Users/{{ .username }}/.gitignore_global
 [difftool "sourcetree"]
-        cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-        path =
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
 [mergetool "sourcetree"]
-        cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-        trustExitCode = true
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
 [diff]
         tool = bc
 [credential]
@@ -20,3 +20,5 @@
         useHttpPath = true
 [credential "https://git-codecommit.us-west-2.amazonaws.com"]
 	provider = generic
+[commit]
+	template = /Users/{{ .username }}/.stCommitMsg

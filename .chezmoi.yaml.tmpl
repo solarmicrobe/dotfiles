@@ -1,5 +1,7 @@
 {{- $email := promptStringOnce . "email" "Email address?" -}}
 {{- $name := promptStringOnce . "name" "Full Name? (for git and other things)" -}}
+{{- $githubActor := promptStringOnce . "githubActor" "Github Account Name?" -}}
+{{- $username := promptStringOnce . "username" "Local user name?" -}}
 {{- $chassisType := promptStringOnce . "Chassis type?" "desktop, laptop, vm, server, container" -}}
 {{- $emailClient := promptStringOnce . "Email client?" "Mail, Outlook" -}}
 {{- $purpose := promptStringOnce . "Purpose" "personal, work, consulting" -}}
@@ -26,6 +28,8 @@ data:
 {{- end }}
   email: {{ $email | quote }}
   name: {{ $name | quote }}
+  username: {{ $username | quote }}
   emailClient: {{ $emailClient | lower | quote }}
   purpose: {{ $purpose | lower | quote }}
   chassisType: {{ $chassisType | lower | quote }}
+  githubActor: {{ $githubActor }}
