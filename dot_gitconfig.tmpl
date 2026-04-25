@@ -1,5 +1,5 @@
 [init]
-        defaultBranch = master
+    defaultBranch = main
 [user]
 	name = {{ .name }}
 	email = {{ .email }}
@@ -12,13 +12,17 @@
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [diff]
-        tool = bc
+    tool = bc
 [credential]
-        helper = 
-        helper = /usr/local/share/gcm-core/git-credential-manager
+    helper = /usr/local/share/gcm-core/git-credential-manager
 [credential "https://dev.azure.com"]
-        useHttpPath = true
+    useHttpPath = true
 [credential "https://git-codecommit.us-west-2.amazonaws.com"]
 	provider = generic
 [commit]
 	template = /Users/{{ .username }}/.stCommitMsg
+[difftool "bc"]
+    trustExitCode = true
+[ghq]
+    root = /Users/Russell.Park/src/
+    user = PrePass
