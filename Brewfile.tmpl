@@ -1,3 +1,4 @@
+brew "chezmoi"
 # Brew/Bundle requirements
 {{- if or (eq .chassisType "desktop") (eq .chassisType "laptop") }}
 brew "mas"
@@ -14,6 +15,7 @@ brew "pscale"
 brew "terraform"
 brew "vitess"
 {{- if or (eq .chassisType "desktop") (eq .chassisType "laptop") }}
+cask "beyond-compare"
 cask "devtoys"
 cask "dbeaver-community"
 cask "morgen"
@@ -47,9 +49,13 @@ cask "codex-app"
 # GUI only recepies
 {{- if or (eq .chassisType "desktop") (eq .chassisType "laptop") }}
 brew "diskonaut"
+{{- if has "container-tools" .tags }}
+brew "dive"
+{{- end }}
 brew "sleepwatcher", restart_service: :changed
 brew "terminal-notifier"
 cask "1password"
+cask "1password-cli"
 cask "bluetility"
 cask "caffeine"
 cask "google-chrome"
@@ -58,7 +64,7 @@ cask "expandrive"
 cask "git-credential-manager"
 cask "notion"
 {{- if has "container-tools" .tags }}
-cask "podman-desktop"
+cask "orbstack"
 {{- end }}
 cask "rectangle"
 mas "Clocker", id: 1056643111
@@ -70,6 +76,7 @@ mas "Slack", id: 803453959
 {{- if or (eq .purpose "work" ) (eq .purpose "consulting" ) }}
 cask "claude"
 cask "claude-code"
+cask "dotnet-sdk@9"
 cask "manictime"
 {{- end }}
 
@@ -82,7 +89,6 @@ brew "awscli"
 {{- end }}
 {{- if has "container-tools" .tags }}
 brew "podman"
-brew "dive"
 {{- end }}
 {{- if has "kubernetes" .tags }}
 tap "derailed/k9s"
@@ -110,9 +116,11 @@ brew "antigen"
 brew "antidote"
 brew "direnv"
 brew "git"
+brew "ghq"
 brew "htop"
 brew "jq"
 brew "pygments"
+brew "pstree"
 brew "pv"
 brew "the_silver_searcher"
 brew "watch"
