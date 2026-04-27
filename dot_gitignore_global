@@ -1,5 +1,5 @@
 *~
 .DS_Store
 WORKSTREAMS.md
-.claude/settings.local.json
-.claude/worktrees/
+**/.claude/settings.local.json
+**/.claude/worktrees/
