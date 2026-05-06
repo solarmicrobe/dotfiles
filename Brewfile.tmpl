@@ -74,6 +74,7 @@ mas "Slack", id: 803453959
 
 # Work only recepies
 {{- if or (eq .purpose "work" ) (eq .purpose "consulting" ) }}
+
 cask "claude"
 cask "claude-code"
 cask "dotnet-sdk@9"
@@ -92,9 +93,11 @@ brew "podman"
 {{- end }}
 {{- if has "kubernetes" .tags }}
 tap "derailed/k9s"
-brew "kubernetes-cli"
+brew "argocd"
+brew "k3d"
 brew "k9s"
 brew "krew"
+brew "kubernetes-cli"
 brew "openshift-cli"
 brew "helm"
 brew "tektoncd-cli"
