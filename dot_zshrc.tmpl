@@ -133,6 +133,13 @@ export PATH="/usr/local/opt/python@3.11/libexec/bin:$PATH"
 # Setting up path for local custom scripts
 export PATH="$PATH:$HOME/.local/bin"
 
+# bun completions
+[ -s "/Users/Russell.Park/.bun/_bun" ] && source "/Users/Russell.Park/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 echo "Setup sdkman..."
 export SDKMAN_DIR="$HOME/.sdkman"
