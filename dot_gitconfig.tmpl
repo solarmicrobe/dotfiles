@@ -5,6 +5,10 @@
 	email = {{ .email }}
 [includeIf "gitdir:~/.local/share/chezmoi/"]
     path = ~/.gitconfig-chezmoi
+[includeIf "gitdir:~/src/solarmicrobe/"]
+    path = ~/.gitconfig-solarmicrobe
+[includeIf "gitdir:~/src/rezzell/"]
+    path = ~/.gitconfig-rezzell
 [core]
 	excludesfile = /Users/{{ .username }}/.gitignore_global
 [difftool "sourcetree"]
