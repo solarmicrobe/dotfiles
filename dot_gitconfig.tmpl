@@ -3,7 +3,7 @@
 [user]
 	name = {{ .name }}
 	email = {{ .email }}
-[includeIf "gitdir:~/.local/share/chezmoi"]
+[includeIf "gitdir:~/.local/share/chezmoi/"]
     path = ~/.gitconfig-chezmoi
 [core]
 	excludesfile = /Users/{{ .username }}/.gitignore_global
