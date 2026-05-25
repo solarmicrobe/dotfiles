@@ -4,3 +4,4 @@ WORKSTREAMS.md
 **/.claude/settings.local.json
 **/.claude/worktrees/
 **/*.local.md
+.worktrees
