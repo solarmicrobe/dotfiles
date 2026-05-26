@@ -16,6 +16,7 @@ export AUTOSWITCH_DEFAULT_PYTHON=python3
 
 # Source antidote
 echo "Source antidote"
+export NVM_AUTO_USE=true
 source $(brew --prefix)/share/antidote/antidote.zsh
 
 # initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
