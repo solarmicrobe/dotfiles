@@ -41,6 +41,7 @@ ohmyzsh/ohmyzsh path:themes/gnzh.zsh-theme
 # Other plugins
 MichaelAquilina/zsh-autoswitch-virtualenv
 dmakeienko/azcli
+lukechilds/zsh-nvm
 
 # Zsh users plugins last
 zsh-users/zsh-completions
