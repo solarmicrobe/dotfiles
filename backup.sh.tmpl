@@ -1,0 +1,22 @@
+{{ if eq .purpose "work" -}}
+#!/bin/zsh
+set -euo pipefail
+
+DATE=$(date +%F)
+
+PROFILE="$HOME/Library/Application Support/Google/Chrome/Default"
+DEST="$HOME/OneDrive - PrePass"
+
+mkdir -p "$DEST"
+
+cp "$PROFILE/Bookmarks" "$DEST/Bookmarks" 2>/dev/null || true
+cp "$PROFILE/Preferences" "$DEST/Preferences" 2>/dev/null || true
+cp "$PROFILE/Favicons" "$DEST/Favicons" 2>/dev/null || true
+
+rsync -a "$PROFILE/Extensions/" "$DEST/Extensions/" 2>/dev/null || true
+rsync -a "$PROFILE/Local Extension Settings/" "$DEST/Local Extension Settings/" 2>/dev/null || true
+rsync -a "$PROFILE/Sync Extension Settings/" "$DEST/Sync Extension Settings/" 2>/dev/null || true
+
+echo "Backed up Chrome profile basics to:"
+echo "$DEST"
+{{ end }}
