@@ -1,0 +1,47 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(~/.claude/guides/)",
+      "Bash(git fetch:*)",
+      "Bash(gh pr view:*)",
+      "Bash(git log *)"{{ if eq .purpose "work" }},
+      "mcp__claude_ai_Atlassian__getJiraIssue",
+      "mcp__claude_ai_Atlassian__searchJiraIssuesUsingJql",
+      "mcp__claude_ai_Atlassian__searchConfluenceUsingCql",
+      "mcp__claude_ai_Atlassian__*",
+      "Bash(dotnet:*)"{{ end }}
+    ],
+    "deny": [
+      "Read(./.env*)",
+      "Read(**/secrets/**)",
+      "Bash(printenv)",
+      "Bash(export)"
+    ],
+    "additionalDirectories": []
+  },
+  "model": "opus[1m]",
+  "statusLine": {
+    "type": "command",
+    "command": "bash \"{{ .chezmoi.homeDir }}/.claude/plugins/cache/caveman/caveman/c2ed24b3e5d4/hooks/caveman-statusline.sh\""
+  },
+  "enabledPlugins": {
+    "caveman@caveman": true,
+    "warp@claude-code-warp": true
+  },
+  "extraKnownMarketplaces": {
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
+    },
+    "claude-code-warp": {
+      "source": {
+        "source": "github",
+        "repo": "warpdotdev/claude-code-warp"
+      }
+    }
+  },
+  "effortLevel": "xhigh",
+  "skipAutoPermissionPrompt": true
+}

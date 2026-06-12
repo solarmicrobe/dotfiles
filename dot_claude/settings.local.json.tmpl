@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__claude_ai_Microsoft_Learn__microsoft_docs_fetch",
+      "mcp__claude_ai_Microsoft_Learn__microsoft_docs_search",
+      "mcp__claude_ai_Microsoft_Learn__microsoft_code_sample_search",
+      "Bash(echo *)",
+      "Bash(git fetch *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git rebase --abort *)",
+      "Bash(git rebase --continue *)",
+      "Bash(git pull --ff-only *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(gh pr list *)",
+      "Bash(ssh-add -l)",
+      "Bash(brew list *)",
+      "Bash(brew info *)",
+      "Bash(claude --usage)",
+      "Bash(claude usage *)",
+      "Bash(claude mcp list)",
+      "Read(/{{ .chezmoi.homeDir }}/.claude/**)",
+      "Read(/{{ .chezmoi.homeDir }}/Documents/todo-*.md)",
+      "Edit(/{{ .chezmoi.homeDir }}/Documents/todo-*.md)",
+      "Read(//tmp/**)",
+      "WebSearch",
+      "WebFetch(domain:api.anthropic.com)"{{ if eq .purpose "work" }},
+      "mcp__claude_ai_Atlassian_Rovo__get*",
+      "mcp__claude_ai_Atlassian_Rovo__search*",
+      "mcp__claude_ai_Atlassian_Rovo__lookup*",
+      "mcp__claude_ai_Atlassian_Rovo__atlassianUserInfo",
+      "mcp__claude_ai_Atlassian__get*",
+      "mcp__claude_ai_Atlassian__search*",
+      "Bash(pnpm lint *)",
+      "Bash(redocly lint *)",
+      "Bash(nswag *)",
+      "Read(/{{ .chezmoi.homeDir }}/Documents/promotions/*)",
+      "Edit(/{{ .chezmoi.homeDir }}/Documents/promotions/*)"{{ end }}
+    ]
+  }
+}
