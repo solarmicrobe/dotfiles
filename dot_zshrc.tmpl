@@ -71,6 +71,14 @@ if command -v kubectl > /dev/null; then
 fi
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
+if command -v git > /dev/null; then
+git-clean() {
+git fetch --prune --all
+git reflog expire --expire=now --all
+git gc --prune=now --aggressive
+}
+fi
+
 # Use claude in a tempdir
 if command -v claude > /dev/null; then
 tmpclaude () {
@@ -133,6 +141,10 @@ export PATH="/usr/local/opt/python@3.11/libexec/bin:$PATH"
 
 # Setting up path for local custom scripts
 export PATH="$PATH:$HOME/.local/bin"
+
+# Setting up path for golang binaries
+export GOPATH="$HOME/go"
+export PATH="$GOPATH/bin:$PATH"
 
 # bun completions
 [ -s "/Users/Russell.Park/.bun/_bun" ] && source "/Users/Russell.Park/.bun/_bun"
