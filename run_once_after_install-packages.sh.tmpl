@@ -3,6 +3,6 @@
 export HOMEBREW_ACCEPT_EULA=Y 
 {{ if eq .chezmoi.os "darwin" }}
 # Brewfile hash: {{ includeTemplate "Brewfile.tmpl" . | sha256sum }}
-brew trust derailed/k9s microsoft/mssql-release planetscale/tap
+brew trust derailed/k9s microsoft/mssql-release planetscale/tap localstack/tap noobaa/noobaa solarmicrobe/old-versions
 brew bundle --file={{ joinPath .chezmoi.homeDir "Brewfile" | quote }}
 {{ end }}
