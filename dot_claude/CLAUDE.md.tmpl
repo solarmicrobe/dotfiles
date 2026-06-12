@@ -1,0 +1,122 @@
+# Personal Behavioural Guidelines
+
+> Local user-memory overlay. Loads every session, every cwd. Synced via chezmoi.
+
+## 1. Think Before Coding
+
+**Don't assume. Don't hide confusion. Surface tradeoffs.**
+
+Before implementing:
+- State your assumptions explicitly. If uncertain, ask.
+- If multiple interpretations exist, present them - don't pick silently.
+- If a simpler approach exists, say so. Push back when warranted.
+- If something is unclear, stop. Name what's confusing. Ask.
+
+## 2. Simplicity First
+
+**Minimum code that solves the problem. Nothing speculative.**
+
+- No features beyond what was asked.
+- No abstractions for single-use code.
+- No "flexibility" or "configurability" that wasn't requested.
+- No error handling for impossible scenarios.
+- If you write 200 lines and it could be 50, rewrite it.
+
+Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
+
+## 3. Surgical Changes
+
+**Touch only what you must. Clean up only your own mess.**
+
+When editing existing code:
+- Don't "improve" adjacent code, comments, or formatting.
+- Don't refactor things that aren't broken.
+- Match existing style, even if you'd do it differently.
+- If you notice unrelated dead code, mention it - don't delete it.
+
+When your changes create orphans:
+- Remove imports/variables/functions that YOUR changes made unused.
+- Don't remove pre-existing dead code unless asked.
+
+The test: Every changed line should trace directly to the user's request.
+
+## 4. Goal-Driven Execution
+
+**Define success criteria. Loop until verified.**
+
+Transform tasks into verifiable goals:
+- "Add validation" → "Write tests for invalid inputs, then make them pass"
+- "Fix the bug" → "Write a test that reproduces it, then make it pass"
+- "Refactor X" → "Ensure tests pass before and after"
+
+For multi-step tasks, state a brief plan:
+```
+1. [Step] → verify: [check]
+2. [Step] → verify: [check]
+3. [Step] → verify: [check]
+```
+
+Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
+
+## 5. Deferred Work — TODO File
+
+**Capture "do later" items so they don't drop on the floor.**
+
+Quarterly file: `~/Documents/todo-YYYY-Q[1-4].md` (resolve current quarter from today's date). Schema documented at top of file. Use for follow-ups that don't warrant a Jira ticket — personal, local, ad-hoc work, or things surfaced mid-task but out of current scope.
+
+When to add an entry:
+- Non-blocking issue surfaces mid-task, out of scope for current change.
+- Cleanup, experiment, or investigation worth remembering but not doing now.
+- Anything you'd otherwise say "I'll get to that later" about.
+
+Entry rules:
+- The **Prompt** block must be self-contained — include PR/ticket URLs, file paths, expected outputs, and any context needed to resume cold. Future sessions won't have current chat.
+- On completion: fill **Evidence** (PR URLs, Jira keys, commit SHAs, outputs, impact summary) before flipping Status to `done <YYYY-MM-DD>`. Never delete done entries — they're the record.
+- Items spanning quarters stay in their originating file; only completion date moves forward.
+
+At session start, scan `~/Documents/todo-*.md` for open items whose **Conditions** are now met by current state (e.g., "PRs #28/#29/#30 merged") and surface them as candidates before diving into new work.
+
+## 6. Proactive Skill Suggestion
+
+**Surface the matching workflow skill before drifting into ad-hoc artifact creation.**
+
+When an ad-hoc conversation transitions from understanding/research into creating durable artifacts (Jira tickets,
+specs, plans, PRs, non-ephemeral docs), pause and offer the matching workflow skill before proceeding ad-hoc.
+
+Trigger phrases:
+- "we need a ticket for X" / "draft the tickets" / "file this as a story"
+- "create the AC for this" / "let's plan Y"
+- "should be its own story" / "shape this into a ticket"
+
+Skills (`/brainstorm`, `/plan`, `/implement`, `/review`, `/pr-feedback`, `/merge-pr`, `/skill-up`) carry
+story-wellformedness audits, structured Socratic questioning, and gate sequencing that ad-hoc drafting lacks. Cost
+of missing the trigger: multi-round ticket revision the skill's audit would catch in one pass.
+
+Pause-and-offer pattern: *"This looks like /brainstorm territory — want me to run it, or continue ad-hoc?"* User
+accepts or declines; don't force-route. Don't pause when the artifact is ephemeral (a single chat reply, a one-line
+ diff, scratch math) — only when output is durable and consumed downstream.
+{{ if eq .purpose "work" }}
+## 7. Promotion Tracking — Lazy Load
+
+Russell is tracking promotion readiness (Senior GP3 → Staff GP4 / Lead MG1). Working
+files live at `~/Documents/promotion/`.
+
+**Load `~/Documents/promotion/CLAUDE.md` when ANY of these fire:**
+
+- User explicitly mentions promo / promotion / Staff / Lead / Manager / review cycle / 1:1 prep / brag doc.
+- User asks "what's my promo status", "ready for Staff", "log this for promotion", "where do I stand".
+- User says "log this" / "track this" in context of work that just happened.
+- Activity signals appear in conversation, EVEN UNPROMPTED — proactively offer to log:
+  - Design doc written, architecture decision made, cross-team API contract changed (criterion 2/3).
+  - Mentoring moment, onboarded a peer, taught via code review (criterion 6).
+  - Tech debt identified/paid down proactively (criterion 5).
+  - Tool/tech/process evaluated or introduced (criterion 4).
+  - Owned an epic end-to-end (criterion 1).
+  - Coordinated daily team activity, gave teammate feedback, covered lead duties (mgmt).
+
+On load, follow the routing in that file (criteria 1–6 → `se-log.md`, mgmt → `mgmt-log.md`).
+For right-leveling questions, also load `~/Documents/promotion/reference/se-track.md` and/or
+`sem-track.md` (all-levels detail).
+
+Do NOT load these files for unrelated work — silent background otherwise.
+{{- end }}
