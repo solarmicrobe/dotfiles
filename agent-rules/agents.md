@@ -6,6 +6,7 @@ Use when editing prompts, evals, tool contracts, model routing, memory behavior,
 
 - Preserve tool and structured-output contracts unless the change explicitly includes a compatibility update.
 - Add or update evals, regression checks, or reproducible transcripts when agent behavior changes.
+- Treat Markdown that defines agent behavior as implementation, not documentation, when choosing commit types.
 - Prefer the smallest context that can support the task; summarize bulky material once the relevant facts are captured.
 - Distinguish persistent memory, retrieved context, and turn-local working state before changing behavior.
 - State expected behavior changes, cost or latency impact, and any fallback path explicitly.
