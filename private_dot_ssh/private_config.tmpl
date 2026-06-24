@@ -1,0 +1,33 @@
+# Added by OrbStack: 'orb' SSH host for Linux machines
+# This only works if it's at the top of ssh_config (before any Host blocks).
+# This won't be added again if you remove it.
+Include ~/.orbstack/ssh/config
+
+{{- if or (eq .purpose "personal") (eq .purpose "consulting") }}
+Host mini
+    HostName mac-mini-w.home.rezzell.com
+    User {{ onepasswordRead "op://3fgxzhvd2wicuyug46en366shq/mvqvy5q33jp4wnvnst3pzn5f7y/username" }}
+    IdentityFile ~/.ssh/russell_id_ed25519
+
+Host core-switch.rezzell.com 10.10.0.2
+    User {{ onepasswordRead "op://3fgxzhvd2wicuyug46en366shq/4usj7rpqbaxe4b6jk7cb47jqwy/username" }}
+    # legacy server requirements
+    KexAlgorithms +diffie-hellman-group1-sha1
+    HostKeyAlgorithms +ssh-rsa
+    PubkeyAcceptedAlgorithms +ssh-rsa
+    # work around RomSShell PK_OK bug
+    PubkeyAuthentication yes
+    IdentitiesOnly yes
+    #PreferredAuthentications keyboard-interactive,password
+    #IdentityFile ~/.ssh/brocade_id_rsa
+
+Host pve00.lab.rezzell.com
+    User {{ onepasswordRead "op://3fgxzhvd2wicuyug46en366shq/yemcp2yy5fp5v6ne5jw3f6oj3a/username" }}
+    IdentityFile  ~/.ssh/russell_id_ed25519
+
+{{ end -}}
+Host *
+  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+  ControlMaster auto
+  ControlPath ~/.ssh/master-%r@%h:%p
+  ControlPersist 10m
