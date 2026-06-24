@@ -5,10 +5,14 @@
 	email = {{ .email }}
 [includeIf "gitdir:~/.local/share/chezmoi/"]
     path = ~/.gitconfig-chezmoi
+{{- if or (eq .purpose "personal") (eq .purpose "consulting")  }}
 [includeIf "gitdir:~/src/solarmicrobe/"]
     path = ~/.gitconfig-solarmicrobe
 [includeIf "gitdir:~/src/rezzell/"]
     path = ~/.gitconfig-rezzell
+[includeIf "gitdir:~/src/bitbucket.org/microbial/"]
+    path = ~/.gitconfig-microbial
+{{ end -}}
 [core]
 	excludesfile = /Users/{{ .username }}/.gitignore_global
 [difftool "sourcetree"]
@@ -31,4 +35,4 @@
     trustExitCode = true
 [ghq]
     root = /Users/{{ .username }}/src/
-    user = PrePass
+    ignoreHost = true

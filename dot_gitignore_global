@@ -5,3 +5,4 @@ WORKSTREAMS.md
 **/.claude/worktrees/
 **/*.local.md
 .worktrees
+**/.codex/worktrees/
