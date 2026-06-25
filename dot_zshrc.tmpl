@@ -40,6 +40,8 @@ alias vaultcn1='export VAULT_ADDR=https://vault-cn1.garmin.com;echo \"Logging in
 alias vaultukb='export VAULT_ADDR=https://vault-ukb.garmin.com;echo \"Logging into $VAULT_ADDR as $USER ...\";vault login -method=ldap username=$USER'
 {{ end }}
 
+! command -v claude 2>/dev/null || alias c="claude --enable-auto-mode"
+
 echo "Set up functions"
 # curl with time output
 curltime() {
