@@ -5,7 +5,7 @@
 	email = {{ .email }}
 [includeIf "gitdir:~/.local/share/chezmoi/"]
     path = ~/.gitconfig-chezmoi
-{{- if or (eq .purpose "personal") (eq .purpose "consulting")  }}
+{{ if or (eq .purpose "personal") (eq .purpose "consulting") -}}
 [includeIf "gitdir:~/src/solarmicrobe/"]
     path = ~/.gitconfig-solarmicrobe
 [includeIf "gitdir:~/src/rezzell/"]
@@ -29,6 +29,12 @@
     useHttpPath = true
 [credential "https://git-codecommit.us-west-2.amazonaws.com"]
 	provider = generic
+[credential "https://github.com"]
+	helper =
+	helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !gh auth git-credential
 [commit]
 	template = /Users/{{ .username }}/.stCommitMsg
 [difftool "bc"]
