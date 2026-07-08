@@ -12,6 +12,10 @@ fi
 export ZSH_DOTENV_ALLOWED_LIST=~/.cache/dotenv-allowed.list
 export ZSH_DOTENV_DISALLOWED_LIST=~/.cache/dotenv-disallowed.list
 export ZSH_CACHE_DIR=~/.cache
+# OMZ plugins (argocd, docker, ...) dump completions here; antidote skips
+# oh-my-zsh.sh which normally creates it, so make it ourselves and add to fpath.
+[[ -d "$ZSH_CACHE_DIR/completions" ]] || mkdir -p "$ZSH_CACHE_DIR/completions"
+fpath+=("$ZSH_CACHE_DIR/completions")
 export AUTOSWITCH_DEFAULT_PYTHON=python3
 
 # Source antidote
