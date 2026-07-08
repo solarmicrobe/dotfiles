@@ -88,12 +88,13 @@ fi
 
 # Use claude in a tempdir
 if command -v claude > /dev/null; then
-tmpclaude () {
+claude-tmp () {
      export TMPDIR=$(mktemp -dt claude)
      cd $TMPDIR
      claude
- }
- fi
+}
+alias ct=claude-tmp
+fi
 
 echo "Set up KUBECONFIG"
 # Set the default kube context if present
