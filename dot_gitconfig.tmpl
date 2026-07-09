@@ -13,6 +13,10 @@
 [includeIf "gitdir:~/src/bitbucket.org/microbial/"]
     path = ~/.gitconfig-microbial
 {{ end -}}
+{{ if eq .purpose "work" -}}
+ [includeIf "gitdir:~/Documents/promotion/"]
+     path = ~/.gitconfig-prepass
+{{ end -}}
 [core]
 	excludesfile = /Users/{{ .username }}/.gitignore_global
 [difftool "sourcetree"]
