@@ -26,6 +26,13 @@ Host pve00.lab.rezzell.com
     IdentityFile  ~/.ssh/russell_id_ed25519
 
 {{ end -}}
+# GitHub distinguishes accounts by key, not username, so all accounts collapse to
+# one multiplex socket (master-git@github.com:22). Disable sharing so per-repo key
+# pins (core.sshCommand) are always honored on a fresh connection.
+Host github.com
+  ControlMaster no
+  ControlPath none
+
 Host *
   IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
   ControlMaster auto
