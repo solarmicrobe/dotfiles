@@ -6,6 +6,21 @@
 
 Keep active context small. Read this file first, then load only the relevant module under `~/agent-rules/` for the current task. Do not load all rule modules by default.
 
+## Public Content Boundary
+
+Employer, client, customer, and partner material is confidential by default. Never scan W2 work, consulting work,
+repositories, email, tickets, chats, notes, or documents for public-content ideas without explicit user instruction.
+When the user asks to extract public-safe consulting content from W2, client, or private material, load
+`~/agent-rules/profiles/public-content.md`; that profile routes the required on-demand skills. Public content must
+generalize the pattern without exposing proprietary implementation details, and employment agreements, client
+contracts, NDAs, policies, and legal obligations take precedence.
+
+Available on-demand public-content skills:
+- `public-content-extractor.md`: extract generalized, public-safe engineering lessons from explicit source material.
+- `confidentiality-guardian.md`: required before any source-derived idea advances toward public drafting.
+- `thought-leadership-editor.md`: develop approved ideas into consulting website, LinkedIn, talk, or newsletter drafts.
+- `research-agenda-manager.md`: prioritize research and publishing themes around the consulting body of work.
+
 ## 1. Think Before Coding
 
 **Don't assume. Don't hide confusion. Surface tradeoffs.**

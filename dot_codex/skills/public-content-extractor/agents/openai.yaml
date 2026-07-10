@@ -1,0 +1,4 @@
+interface:
+  display_name: "Public Content Extractor"
+  short_description: "Extract public-safe engineering lessons"
+  default_prompt: "Use $public-content-extractor to extract public-safe engineering lessons from these notes."
