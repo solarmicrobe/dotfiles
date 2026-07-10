@@ -78,7 +78,10 @@ Entry rules:
 - On completion: fill **Evidence** (PR URLs, Jira keys, commit SHAs, outputs, impact summary) before flipping Status to `done <YYYY-MM-DD>`. Never delete done entries — they're the record.
 - Items spanning quarters stay in their originating file; only completion date moves forward.
 
-At session start, scan `~/Documents/todo-*.md` for open items whose **Conditions** are now met by current state (e.g., "PRs #28/#29/#30 merged") and surface them as candidates before diving into new work.
+At session start, check whether `~/Documents/todo-*.md` exists. If it does, scan only open-item metadata
+(`Status`, `Conditions`, short title) to find items whose **Conditions** may now be met by current state
+(e.g., "PRs #28/#29/#30 merged"). Load full `Prompt` / `Evidence` bodies only when an open item's
+conditions match the current task or need verification, then surface it as a candidate before diving into new work.
 
 ## 6. Proactive Skill Suggestion
 
@@ -99,8 +102,36 @@ of missing the trigger: multi-round ticket revision the skill's audit would catc
 Pause-and-offer pattern: *"This looks like /brainstorm territory — want me to run it, or continue ad-hoc?"* User
 accepts or declines; don't force-route. Don't pause when the artifact is ephemeral (a single chat reply, a one-line
  diff, scratch math) — only when output is durable and consumed downstream.
+
+## 7. Progressive Disclosure — Guides and References
+
+**Load the smallest useful slice, then expand only when the task proves it needs more.**
+
+When a task points at guides, references, specs, manuals, or project-local instructions:
+- Start with the local entry point: `AGENTS.md`, `CLAUDE.md`, `README`, index, table of contents, or the smallest file that routes the work.
+- Prefer search, headings, summaries, and referenced sections over reading whole guide trees.
+- Load a referenced file only when it directly changes the next decision or verification step.
+- Stop loading once the next safe action is clear. Summarize the facts that matter instead of keeping bulky raw context active.
+- If two guides disagree, name the conflict and prefer the closest project-local or explicitly canonical source. Ask when the safer choice is not obvious.
+- Do not copy broad guide content into prompts, tickets, or generated docs unless the user asked for that artifact to contain it.
+
+When guide content must stay in sync:
+- Identify the source of truth before editing. Shared agent behavior belongs in this template; specialized behavior belongs in the relevant `~/agent-rules/` module.
+- Do not duplicate a rule across multiple generated targets when a template or module can own it.
+- If a rule already exists in multiple places, update the canonical source and the necessary generated or referenced copies in the same change.
+- After changing shared instructions, verify the rendered targets or explain why rendering was not run.
+- If a sync cleanup is useful but out of scope, add a self-contained TODO entry instead of doing opportunistic cleanup.
+
+## 8. Creative Content — AIL Lazy Load
+
+**For creative works, load the detailed AIL rules only when the task needs them.**
+
+When drafting, editing, generating, or preparing to publish creative content, load `~/agent-rules/writing.md`
+and follow its AIL disclosure rules. Before publishing, sending, posting, submitting, or packaging final creative
+work with an AIL disclosure, ask the user to confirm they agree with the proposed level and wording. Do not infer
+approval from silence.
 {{ if eq .purpose "work" }}
-## 7. Promotion Tracking — Lazy Load
+## 9. Promotion Tracking — Lazy Load
 
 Russell is tracking promotion readiness (Senior GP3 → Staff GP4 / Lead MG1). Working
 files live at `~/Documents/promotion/`.
@@ -152,7 +183,7 @@ Load `~/agent-rules/research.md` when facts may be stale, the user asks to verif
 
 Load `~/agent-rules/product.md` when shaping scope, prioritizing features, comparing bets, or making solo-founder product decisions.
 
-Load `~/agent-rules/writing.md` when drafting docs, plans, customer-facing text, or any prose meant to be read by humans.
+Load `~/agent-rules/writing.md` when drafting docs, plans, customer-facing text, creative content, AIL disclosures, or any prose meant to be read by humans.
 
 Load `~/agent-rules/shipping.md` when preparing releases, deployments, migrations, launches, operational changes, or user-visible rollouts.
 
