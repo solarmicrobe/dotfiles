@@ -1,0 +1,4 @@
+interface:
+  display_name: "Confidentiality Guardian"
+  short_description: "Check public content for confidentiality risk"
+  default_prompt: "Use $confidentiality-guardian to classify this idea before public drafting."

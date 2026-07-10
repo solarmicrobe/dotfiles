@@ -1,0 +1,4 @@
+interface:
+  display_name: "Research Agenda Manager"
+  short_description: "Prioritize consulting research themes"
+  default_prompt: "Use $research-agenda-manager to prioritize my public research and publishing themes."

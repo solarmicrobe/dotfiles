@@ -1,0 +1,4 @@
+interface:
+  display_name: "Thought Leadership Editor"
+  short_description: "Develop approved ideas into public content"
+  default_prompt: "Use $thought-leadership-editor to develop this approved idea into public content."
