@@ -25,6 +25,19 @@ Host pve00.lab.rezzell.com
     User {{ onepasswordRead "op://3fgxzhvd2wicuyug46en366shq/yemcp2yy5fp5v6ne5jw3f6oj3a/username" }}
     IdentityFile  ~/.ssh/russell_id_ed25519
 
+Host cse217-00-a
+    HostName cse217-00-a.lab.rezzell.com
+
+Host cse217-00-b
+    HostName cse217-00-b.lab.rezzell.com
+
+Host cse217-00-c
+    HostName cse217-00-c.lab.rezzell.com
+
+Host cse217-00-a cse217-00-b cse217-00-c
+    User core
+    IdentityFile ~/.ssh/russell_id_ed25519
+
 {{ end -}}
 # GitHub distinguishes accounts by key, not username, so all accounts collapse to
 # one multiplex socket (master-git@github.com:22). Disable sharing so per-repo key
