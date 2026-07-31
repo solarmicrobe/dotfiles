@@ -3,6 +3,11 @@
 [user]
 	name = {{ .name }}
 	email = {{ .email }}
+[core]
+	excludesfile = /Users/{{ .username }}/.gitignore_global
+{{- if eq .purpose "work" }}
+    sshCommand = "ssh -i ~/.ssh/prepass_id_ed25519 -o IdentitiesOnly=yes"
+{{ end -}}
 [includeIf "gitdir:~/.local/share/chezmoi/"]
     path = ~/.gitconfig-chezmoi
 {{ if or (eq .purpose "personal") (eq .purpose "consulting") -}}
@@ -17,8 +22,6 @@
  [includeIf "gitdir:~/Documents/promotion/"]
      path = ~/.gitconfig-prepass
 {{ end -}}
-[core]
-	excludesfile = /Users/{{ .username }}/.gitignore_global
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 

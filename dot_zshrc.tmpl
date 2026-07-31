@@ -94,6 +94,12 @@ claude-tmp () {
      claude
 }
 alias ct=claude-tmp
+cc() {
+  local wt="$1"
+  [[ -z "$wt" ]] && { echo "usage: cc <worktree-name> [claude args]"; return 1; }
+  shift
+  tmux new-session -A -s "cc-$wt" "claude --worktree $wt $*"
+}
 fi
 
 echo "Set up KUBECONFIG"
