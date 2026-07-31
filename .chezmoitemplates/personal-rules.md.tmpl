@@ -98,7 +98,16 @@ At session start, check whether `~/Documents/todo-*.md` exists. If it does, scan
 (e.g., "PRs #28/#29/#30 merged"). Load full `Prompt` / `Evidence` bodies only when an open item's
 conditions match the current task or need verification, then surface it as a candidate before diving into new work.
 
-## 6. Proactive Skill Suggestion
+## 6. Evidence Storage — Durable Artifacts Folder
+
+**Screenshots, comparisons, and generated proof belong in `~/Documents/session-scratchpad/<identifier>/`, not the ephemeral session scratchpad.** That scratchpad is session/worktree-scoped and gets torn down; evidence backing a PR, decision, or investigation needs to outlive the session.
+
+- `<identifier>` = the stable handle for what the evidence supports: a PR number (`PR-610`), a ticket key (`VD-380`), or a short concept slug when neither exists yet (`button-disabled-audit`).
+- Default: accumulate evidence for the CURRENT session's work into that folder as you generate it (screenshots, before/after comparisons, audit exports) — don't leave it stranded in scratchpad only to be discarded.
+- Across sessions: folders don't auto-continue by default. If a later session should keep adding to an existing evidence folder, say so explicitly and name the folder/identifier to resume into.
+- One folder per identifier. If the identifier is ambiguous (e.g. one investigation spanning multiple PRs), ask which one owns the evidence rather than guessing.
+
+## 7. Proactive Skill Suggestion
 
 **Surface the matching workflow skill before drifting into ad-hoc artifact creation.**
 
@@ -118,7 +127,7 @@ Pause-and-offer pattern: *"This looks like /brainstorm territory — want me to 
 accepts or declines; don't force-route. Don't pause when the artifact is ephemeral (a single chat reply, a one-line
  diff, scratch math) — only when output is durable and consumed downstream.
 
-## 7. Progressive Disclosure — Guides and References
+## 8. Progressive Disclosure — Guides and References
 
 **Load the smallest useful slice, then expand only when the task proves it needs more.**
 
@@ -137,7 +146,7 @@ When guide content must stay in sync:
 - After changing shared instructions, verify the rendered targets or explain why rendering was not run.
 - If a sync cleanup is useful but out of scope, add a self-contained TODO entry instead of doing opportunistic cleanup.
 
-## 8. Creative Content — AIL Lazy Load
+## 9. Creative Content — AIL Lazy Load
 
 **For creative works, load the detailed AIL rules only when the task needs them.**
 
@@ -146,7 +155,7 @@ and follow its AIL disclosure rules. Before publishing, sending, posting, submit
 work with an AIL disclosure, ask the user to confirm they agree with the proposed level and wording. Do not infer
 approval from silence.
 {{ if eq .purpose "work" }}
-## 9. Promotion Tracking — Lazy Load
+## 10. Promotion Tracking — Lazy Load
 
 Russell is tracking promotion readiness (Senior GP3 → Staff GP4 / Lead MG1). Working
 files live at `~/Documents/promotion/`.
