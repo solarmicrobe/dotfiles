@@ -4,7 +4,7 @@
 	name = {{ .name }}
 	email = {{ .email }}
 [core]
-	excludesfile = /Users/{{ .username }}/.gitignore_global
+	excludesfile = ~/.gitignore_global
 {{- if eq .purpose "work" }}
     sshCommand = "ssh -i ~/.ssh/prepass_id_ed25519 -o IdentitiesOnly=yes"
 {{ end -}}
@@ -43,9 +43,9 @@
 	helper =
 	helper = !gh auth git-credential
 [commit]
-	template = /Users/{{ .username }}/.stCommitMsg
+	template = ~/.stCommitMsg
 [difftool "bc"]
     trustExitCode = true
 [ghq]
-    root = /Users/{{ .username }}/src/
+    root = ~/src/
     ignoreHost = true
