@@ -7,10 +7,10 @@ Documents
 .ssh/id_ed25519
 .ssh/id_ed25519.pub
 {{ end -}}
-{{ if not (has "personal" .tags) -}}
+{{ if not (or (eq .purpose "personal") (eq .purpose "consulting")) -}}
 .ssh/personal_id_rsa
 .ssh/personal_id_rsa.pub
-{{ end  -}}
+{{ end -}}
 {{ if not (has "work" .tags) -}}
 .ssh/work_id_rsa
 .ssh/work_id_rsa.pub
@@ -19,4 +19,11 @@ Documents
 {{ end -}}
 {{ if eq .purpose "work" -}}
 CLAUDE.md
+{{ end -}}
+{{ if not (or (eq .purpose "personal") (eq .purpose "consulting")) -}}
+.gitconfig-rezzell
+.gitconfig-solarmicrobe
+{{ end -}}
+{{ if ne .purpose "work" -}}
+.gitconfig-prepass
 {{ end -}}
