@@ -1,4 +1,0 @@
-[user]
-    email = russell.parks@rezzell.com
-[core]
-    sshCommand = "ssh -i ~/.ssh/russell-parks-github -o IdentitiesOnly=yes"

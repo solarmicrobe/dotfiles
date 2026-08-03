@@ -1,4 +1,0 @@
-[user]
-    email = Russell.Parks@prepass.com
-[core]
-    sshCommand = "ssh -i ~/.ssh/prepass_id_ed25519 -o IdentitiesOnly=yes"

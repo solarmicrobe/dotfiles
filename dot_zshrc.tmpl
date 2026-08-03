@@ -36,12 +36,12 @@ echo "Set up shell extras"
 alias gdours="git diff REBASE_HEAD~ HEAD"
 alias gdthiers="git diff REBASE_HEAD~ REBASE_HEAD"
 
-{{ if has "garmin" .tags -}}
-export VAULT_FORMAT=json
-alias vaultola='export VAULT_ADDR=https://vault-ola.garmin.com;echo \"Logging into $VAULT_ADDR as $USER ...\";vault login -method=ldap username=$USER'
-alias vaultkcg='export VAULT_ADDR=https://vault-kcg.garmin.com;echo \"Logging into $VAULT_ADDR as $USER ...\";vault login -method=ldap username=$USER'
-alias vaultcn1='export VAULT_ADDR=https://vault-cn1.garmin.com;echo \"Logging into $VAULT_ADDR as $USER ...\";vault login -method=ldap username=$USER'
-alias vaultukb='export VAULT_ADDR=https://vault-ukb.garmin.com;echo \"Logging into $VAULT_ADDR as $USER ...\";vault login -method=ldap username=$USER'
+{{ if eq .purpose "work" -}}
+{{ if hasKey . "workShellRef" -}}
+{{ if ne .workShellRef "" -}}
+{{ onepasswordRead .workShellRef }}
+{{ end -}}
+{{ end -}}
 {{ end }}
 
 ! command -v claude 2>/dev/null || alias c="claude --permission-mode auto"
@@ -161,7 +161,7 @@ export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 
 # bun completions
-[ -s "/Users/Russell.Park/.bun/_bun" ] && source "/Users/Russell.Park/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"

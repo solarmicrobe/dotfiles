@@ -9,6 +9,10 @@
 {{- $containers := promptBoolOnce . "containers" "Working with containers?" -}}
 {{- $kubernetes := promptBoolOnce . "kubernetes" "Manage k8s?" -}}
 {{- $developer := promptBoolOnce . "developer" "Developing on this chassis?" -}}
+{{- $workShellRef := "" -}}
+{{- if eq ($purpose | lower) "work" -}}
+{{-   $workShellRef = promptStringOnce . "workShellRef" "Work shell snippet op:// ref (blank to skip)?" -}}
+{{- end -}}
 data:
   tags:
 {{- if or (eq $cloud "aws") (eq $cloud "all") }}
@@ -33,3 +37,4 @@ data:
   purpose: {{ $purpose | lower | quote }}
   chassisType: {{ $chassisType | lower | quote }}
   githubActor: {{ $githubActor }}
+  workShellRef: {{ $workShellRef | quote }}

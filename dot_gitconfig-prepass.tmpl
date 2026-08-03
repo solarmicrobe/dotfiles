@@ -1,0 +1,5 @@
+[user]
+    name = {{ onepasswordRead "op://ylklrss2u664pzp3dhsd5tsuj4/52ggtbh4hohllrd6ejrd5lwhd4/Identification/first name" }} {{ onepasswordRead "op://ylklrss2u664pzp3dhsd5tsuj4/52ggtbh4hohllrd6ejrd5lwhd4/Identification/last name" }}
+    email = {{ onepasswordRead "op://ylklrss2u664pzp3dhsd5tsuj4/52ggtbh4hohllrd6ejrd5lwhd4/Identification/email" }}
+[core]
+    sshCommand = "ssh -i ~/.ssh/prepass_id_ed25519 -o IdentitiesOnly=yes"
