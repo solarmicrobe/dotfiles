@@ -8,8 +8,8 @@ Documents
 .ssh/id_ed25519.pub
 {{ end -}}
 {{ if not (has "personal" .tags) -}}
-.ssh/russell_id_rsa
-.ssh/russell_id_rsa.pub
+.ssh/personal_id_rsa
+.ssh/personal_id_rsa.pub
 {{ end  -}}
 {{ if not (has "work" .tags) -}}
 .ssh/work_id_rsa
