@@ -37,9 +37,9 @@ alias gdours="git diff REBASE_HEAD~ HEAD"
 alias gdthiers="git diff REBASE_HEAD~ REBASE_HEAD"
 
 {{ if eq .purpose "work" -}}
-{{ if hasKey . "workShellRef" -}}
-{{ if ne .workShellRef "" -}}
-{{ onepasswordRead .workShellRef }}
+{{ if hasKey . "employer" -}}
+{{ if ne .employer "" -}}
+{{ onepasswordRead (printf "op://yq7gqqdesvbzrdtle45q2hhxtm/shell-%s/init" .employer) }}
 {{ end -}}
 {{ end -}}
 {{ end }}

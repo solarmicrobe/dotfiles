@@ -9,9 +9,9 @@
 {{- $containers := promptBoolOnce . "containers" "Working with containers?" -}}
 {{- $kubernetes := promptBoolOnce . "kubernetes" "Manage k8s?" -}}
 {{- $developer := promptBoolOnce . "developer" "Developing on this chassis?" -}}
-{{- $workShellRef := "" -}}
+{{- $employer := "" -}}
 {{- if eq ($purpose | lower) "work" -}}
-{{-   $workShellRef = promptStringOnce . "workShellRef" "Work shell snippet op:// ref (blank to skip)?" -}}
+{{-   $employer = promptStringOnce . "employer" "Which workplace? (matches your shell-<name> 1Password note, blank to skip)" -}}
 {{- end -}}
 data:
   tags:
@@ -37,4 +37,4 @@ data:
   purpose: {{ $purpose | lower | quote }}
   chassisType: {{ $chassisType | lower | quote }}
   githubActor: {{ $githubActor }}
-  workShellRef: {{ $workShellRef | quote }}
+  employer: {{ $employer | quote }}
