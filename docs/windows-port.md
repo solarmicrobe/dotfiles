@@ -42,10 +42,10 @@ scoped there.)
   (redundant with `dot_zshrc.tmpl:157` — candidate for deletion).
 
 ### Phase 1 — WSL
-- [ ] Add derived `platform` var (snippet above).
+- [x] Add derived `platform` (as `.chezmoitemplates/platform` partial, used via `includeTemplate "platform" . | trim` — avoids the re-init a data var would need).
 - [ ] Linux/WSL package path — `brew bundle` is currently `darwin`-gated, so
   WSL/Linux install **nothing**. Use linuxbrew or apt; strip casks / `mas`.
-- [ ] SSH: template `IdentityAgent` per platform.
+- [x] SSH: template `IdentityAgent` per platform (macos socket / windows pipe / wsl bridge sock / linux none). macOS render verified unchanged.
 - [ ] SSH: WSL bridge to the Windows 1Password agent (npiperelay + socat).
 - [ ] git credential helper: reuse the Windows GCM from WSL.
 

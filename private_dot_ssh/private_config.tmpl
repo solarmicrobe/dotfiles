@@ -1,3 +1,4 @@
+{{- $platform := includeTemplate "platform" . | trim -}}
 # Added by OrbStack: 'orb' SSH host for Linux machines
 # This only works if it's at the top of ssh_config (before any Host blocks).
 # This won't be added again if you remove it.
@@ -15,7 +16,9 @@ Host github.com
   IdentityAgent none
 
 Host *
-  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-  ControlMaster auto
+{{ if eq $platform "macos" }}  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+{{ else if eq $platform "windows" }}  IdentityAgent \\.\pipe\openssh-ssh-agent
+{{ else if eq $platform "wsl" }}  IdentityAgent ~/.1password/agent.sock
+{{ end }}  ControlMaster auto
   ControlPath ~/.ssh/master-%r@%h:%p
   ControlPersist 10m

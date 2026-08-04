@@ -1,0 +1,15 @@
+{{- /* Derived platform: macos | windows | wsl | linux. Use via:
+       {{- $platform := includeTemplate "platform" . | trim -}} */ -}}
+{{- if eq .chezmoi.os "darwin" -}}
+macos
+{{- else if eq .chezmoi.os "windows" -}}
+windows
+{{- else if eq .chezmoi.os "linux" -}}
+{{- if contains "microsoft" (lower (.chezmoi.kernel.osrelease | default "")) -}}
+wsl
+{{- else -}}
+linux
+{{- end -}}
+{{- else -}}
+{{- .chezmoi.os -}}
+{{- end -}}
