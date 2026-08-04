@@ -67,8 +67,12 @@ scoped there.)
   files and the POSIX `run_*` scripts (packages via winget instead). **Verify on
   Windows:** confirm chezmoi skips the ignored `run_*` scripts (script-name
   matching in `.chezmoiignore` is untested here).
-- [ ] Optional PowerShell profile (deferred — Windows-native scope is git/gh/ssh
-  + winget for now; no zsh on Windows native).
+- [x] PowerShell profile — `Documents/PowerShell/Microsoft.PowerShell_profile.ps1.tmpl`
+  (claude `c`, git helpers, `~/.local/bin` PATH; GITHUB_PAT is opt-in via a live
+  `op read`, never baked — `~/Documents` may sync to OneDrive). Deploys on
+  Windows only (`Documents` is ignored elsewhere). **Verify on Windows:**
+  `$PROFILE` resolves to chezmoi's target (watch for OneDrive Documents
+  redirection).
 
 ### Phase 3 — behavior changes — **DO ON A BRANCH** (try before merge)
 - [ ] Credential helper `/usr/local/share/gcm-core/git-credential-manager` →

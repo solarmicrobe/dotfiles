@@ -59,6 +59,13 @@ $manifest = Join-Path $HOME ".config\winget\packages.json"
 if (Test-Path $manifest) { Ok "winget manifest present (~/.config/winget/packages.json)" }
 else { Warn "winget manifest not found" "run 'chezmoi apply'; expect ~/.config/winget/packages.json" }
 
+# 8. PowerShell profile deployed + loaded from the expected path
+if (Test-Path $PROFILE.CurrentUserCurrentHost) {
+  Ok "PowerShell profile present ($($PROFILE.CurrentUserCurrentHost))"
+} else {
+  Warn "PowerShell profile not found at `$PROFILE" "run 'chezmoi apply'; if ~/Documents is OneDrive-redirected, chezmoi's target may differ from `$PROFILE — reconcile the path"
+}
+
 Write-Host ""
 Write-Host "== summary: $script:pass pass, $script:warn warn, $script:fail fail =="
 if ($script:fail -eq 0) {

@@ -1,0 +1,30 @@
+# PowerShell profile (Windows-native). Managed by chezmoi — edit the source in
+# the dotfiles repo, not this file. There is no zsh on Windows native; this
+# mirrors the high-value bits of dot_zshrc.tmpl.
+
+# --- Claude ---
+if (Get-Command claude -ErrorAction SilentlyContinue) {
+  function c { claude --permission-mode auto @args }
+}
+
+# --- Git helpers (parity with the zsh aliases) ---
+function gdours   { git diff REBASE_HEAD~ HEAD @args }
+function gdthiers { git diff REBASE_HEAD~ REBASE_HEAD @args }
+
+# --- PATH: user-local bin ---
+$localBin = Join-Path $HOME ".local\bin"
+if ((Test-Path $localBin) -and ($env:PATH -notlike "*$localBin*")) {
+  $env:PATH = "$localBin;$env:PATH"
+}
+
+# --- GitHub auth ---
+# Git authenticates github.com via gh / Git Credential Manager (see .gitconfig),
+# so a GITHUB_PAT env var is not required. If other tooling needs one, fetch it
+# LIVE from 1Password at startup — do NOT bake the token into this file, since
+# ~/Documents may sync to OneDrive. Uncomment:
+#
+{{- if eq .purpose "personal" }}
+#   if (Get-Command op -EA SilentlyContinue) { $env:GITHUB_PAT = (op read "op://yq7gqqdesvbzrdtle45q2hhxtm/cdvvddh7rrfmtmgpmtay3j7q54/credential") }
+{{- else if or (eq .purpose "work") (eq .purpose "consulting") }}
+#   if (Get-Command op -EA SilentlyContinue) { $env:GITHUB_PAT = (op read "op://ylklrss2u664pzp3dhsd5tsuj4/ezvwfyajckgkgvalnkh3yj66ya/credential"); $env:GITHUB_TOKEN = $env:GITHUB_PAT }
+{{- end }}
