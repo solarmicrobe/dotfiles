@@ -1,13 +1,36 @@
 README.md
 docs
 scripts/verify-wsl.sh
+scripts/verify-windows.ps1
 {{ if ne .chezmoi.os "windows" -}}
 Documents
 {{ else -}}
+# Windows native: no zsh; no on-disk SSH private keys (use the 1Password
+# named-pipe agent); POSIX shell scripts can't run (packages come from winget).
+# Git config, ssh config, and agent-rules still deploy.
 .ssh/id_rsa
 .ssh/id_rsa.pub
 .ssh/id_ed25519
 .ssh/id_ed25519.pub
+.ssh/personal_id_ed25519
+.ssh/personal_id_ed25519.pub
+.ssh/personal_id_rsa
+.ssh/imagebuilder_id_ed25519
+.ssh/imagebuilder_id_ed25519.pub
+.zshrc
+.zprofile
+.zsh_plugins.txt
+.tmux.conf
+.sleep
+.wakeup
+run_once_before_install-op.sh
+run_once_after_install-bun
+run_once_after_install-nvm.sh
+run_once_after_install-sdkman.sh
+run_once_after_install-packages.sh
+run_once_after_install-vimrc.sh
+run_once_after_install-update_antidote_plugins.sh
+run_onchange_after_install-usr-local-bin.sh
 {{ end -}}
 {{ if not (or (eq .purpose "personal") (eq .purpose "consulting")) -}}
 .ssh/personal_id_rsa

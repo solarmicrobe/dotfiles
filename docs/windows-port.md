@@ -55,13 +55,18 @@ scoped there.)
 
 ### Phase 2 — Windows native
 - [ ] `winget` manifest (JSON) mirroring Brewfile essentials (git, gh,
-  1Password, vscode, ...); Store apps for the `mas` items.
-- [ ] SSH `IdentityAgent \\.\pipe\openssh-ssh-agent`.
-- [ ] Agent-only keys (no on-disk private keys) to dodge NTFS ACL rejection.
-- [ ] chezmoi `.sh` script handling on Windows — `.chezmoiignore` them or add
-  `.ps1` equivalents / configure `[interpreters]`.
-- [ ] Optional PowerShell profile (or scope Windows-native to git/gh/ssh only
-  first — there is no zsh on Windows native).
+  1Password, vscode, ...); Store apps for the `mas` items. **(next)**
+- [x] SSH `IdentityAgent \\.\pipe\openssh-ssh-agent` (done in the platform partial
+  + ssh config, commit `f106011`).
+- [x] Agent-only keys — Windows `.chezmoiignore` drops on-disk private keys
+  (`personal_id_*`, `imagebuilder_id_*`); keys come from the 1P named-pipe agent,
+  dodging NTFS ACL rejection.
+- [x] chezmoi script/shell handling — Windows `.chezmoiignore` drops the zsh rc
+  files and the POSIX `run_*` scripts (packages via winget instead). **Verify on
+  Windows:** confirm chezmoi skips the ignored `run_*` scripts (script-name
+  matching in `.chezmoiignore` is untested here).
+- [ ] Optional PowerShell profile (deferred — Windows-native scope is git/gh/ssh
+  + winget for now; no zsh on Windows native).
 
 ### Phase 3 — behavior changes — **DO ON A BRANCH** (try before merge)
 - [ ] Credential helper `/usr/local/share/gcm-core/git-credential-manager` →
@@ -105,6 +110,21 @@ never deployed to `~`.)
 **Definition of done (safe to merge to master):** `verify-wsl.sh` exits 0,
 `brew bundle --file ~/Brewfile` completes, and a git push in a
 rezzell/solarmicrobe repo authenticates through the bridged 1Password agent.
+
+## Windows verification (for a future Windows session)
+
+After `chezmoi apply` in PowerShell, from the chezmoi source dir
+(`chezmoi source-path`):
+
+```powershell
+pwsh scripts/verify-windows.ps1
+```
+
+Read-only checks: `platform` partial → `windows`, ssh-config named-pipe
+`IdentityAgent`, no on-disk private keys, `ssh-add -l` reachability,
+`chezmoi apply --dry-run` (1Password paths resolve), winget presence.
+(`scripts/verify-windows.ps1` is `.chezmoiignore`d — repo-only.) Not yet run on
+a real Windows box; the winget package-install path is still TODO.
 
 ## Subsystem reference
 
