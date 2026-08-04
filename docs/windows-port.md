@@ -38,7 +38,7 @@ scoped there.)
 ### Phase 0 — cross-platform hygiene (helps macOS-arm too)
 - [x] `dot_gitconfig.tmpl`: `/Users/{{`{{ .username }}`}}/...` → `~/...` for
   `core.excludesfile`, `commit.template`, `ghq.root` (commit `067c6d3`).
-- [ ] `dot_zprofile.tmpl:2`: `/Users/{{`{{ .username }}`}}/.local/bin` → `$HOME`
+- [x] `dot_zprofile.tmpl:2`: `/Users/{{`{{ .username }}`}}/.local/bin` → `$HOME`
   (redundant with `dot_zshrc.tmpl:157` — candidate for deletion).
 
 ### Phase 1 — WSL
