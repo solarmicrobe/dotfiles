@@ -4,6 +4,8 @@ scripts/verify-wsl.sh
 scripts/verify-windows.ps1
 {{ if ne .chezmoi.os "windows" -}}
 Documents
+.config/winget
+install-winget.ps1
 {{ else -}}
 # Windows native: no zsh; no on-disk SSH private keys (use the 1Password
 # named-pipe agent); POSIX shell scripts can't run (packages come from winget).
@@ -23,14 +25,14 @@ Documents
 .tmux.conf
 .sleep
 .wakeup
-run_once_before_install-op.sh
-run_once_after_install-bun
-run_once_after_install-nvm.sh
-run_once_after_install-sdkman.sh
-run_once_after_install-packages.sh
-run_once_after_install-vimrc.sh
-run_once_after_install-update_antidote_plugins.sh
-run_onchange_after_install-usr-local-bin.sh
+install-op.sh
+install-bun
+install-nvm.sh
+install-sdkman.sh
+install-packages.sh
+install-vimrc.sh
+install-update_antidote_plugins.sh
+install-usr-local-bin.sh
 {{ end -}}
 {{ if not (or (eq .purpose "personal") (eq .purpose "consulting")) -}}
 .ssh/personal_id_rsa

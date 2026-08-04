@@ -54,8 +54,10 @@ scoped there.)
 - [ ] git credential helper: reuse the Windows GCM from WSL.
 
 ### Phase 2 — Windows native
-- [ ] `winget` manifest (JSON) mirroring Brewfile essentials (git, gh,
-  1Password, vscode, ...); Store apps for the `mas` items. **(next)**
+- [x] `winget` manifest — `dot_config/winget/packages.json.tmpl` (purpose-gated:
+  core set + dotnet on work); `run_once…winget.ps1` runs `winget import`.
+  **Verify on Windows:** package IDs are unverified from macOS — run the import
+  and fix any unavailable IDs.
 - [x] SSH `IdentityAgent \\.\pipe\openssh-ssh-agent` (done in the platform partial
   + ssh config, commit `f106011`).
 - [x] Agent-only keys — Windows `.chezmoiignore` drops on-disk private keys

@@ -54,6 +54,11 @@ if (Get-Command chezmoi -ErrorAction SilentlyContinue) {
 if (Get-Command winget -ErrorAction SilentlyContinue) { Ok "winget present" }
 else { Warn "winget not found" "install 'App Installer' from the Microsoft Store" }
 
+# 7. winget manifest deployed
+$manifest = Join-Path $HOME ".config\winget\packages.json"
+if (Test-Path $manifest) { Ok "winget manifest present (~/.config/winget/packages.json)" }
+else { Warn "winget manifest not found" "run 'chezmoi apply'; expect ~/.config/winget/packages.json" }
+
 Write-Host ""
 Write-Host "== summary: $script:pass pass, $script:warn warn, $script:fail fail =="
 if ($script:fail -eq 0) {

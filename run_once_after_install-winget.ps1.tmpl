@@ -1,0 +1,9 @@
+{{ if eq .chezmoi.os "windows" -}}
+# winget packages hash: {{ include "dot_config/winget/packages.json.tmpl" | sha256sum }}
+$manifest = Join-Path $HOME ".config\winget\packages.json"
+if (Get-Command winget -ErrorAction SilentlyContinue) {
+  winget import --import-file $manifest --accept-package-agreements --accept-source-agreements --ignore-unavailable --disable-interactivity
+} else {
+  Write-Warning "winget not found; install 'App Installer' from the Microsoft Store, then run: winget import --import-file $manifest"
+}
+{{ end -}}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://aka.ms/winget-packages.schema.2.0.json",
+  "Sources": [
+    {
+      "SourceDetails": {
+        "Argument": "https://cdn.winget.microsoft.com/cache",
+        "Identifier": "Microsoft.Winget.Source_8wekyb3d8bbwe",
+        "Name": "winget",
+        "Type": "Microsoft.PreIndexed.Package"
+      },
+      "Packages": [
+        { "PackageIdentifier": "Git.Git" },
+        { "PackageIdentifier": "GitHub.cli" },
+        { "PackageIdentifier": "AgileBits.1Password" },
+        { "PackageIdentifier": "AgileBits.1Password.CLI" },
+        { "PackageIdentifier": "twpayne.chezmoi" },
+        { "PackageIdentifier": "Microsoft.VisualStudioCode" },
+        { "PackageIdentifier": "jqlang.jq" },
+        { "PackageIdentifier": "MikeFarah.yq" },
+        { "PackageIdentifier": "Microsoft.PowerShell" },
+        { "PackageIdentifier": "Microsoft.WindowsTerminal" }
+        {{- if or (eq .purpose "work") (eq .purpose "consulting") }},
+        { "PackageIdentifier": "Microsoft.DotNet.SDK.9" }
+        {{- end }}
+      ]
+    }
+  ]
+}
