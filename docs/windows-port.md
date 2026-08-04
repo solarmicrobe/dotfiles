@@ -46,7 +46,7 @@ scoped there.)
 - [ ] Linux/WSL package path — `brew bundle` is currently `darwin`-gated, so
   WSL/Linux install **nothing**. Use linuxbrew or apt; strip casks / `mas`.
 - [x] SSH: template `IdentityAgent` per platform (macos socket / windows pipe / wsl bridge sock / linux none). macOS render verified unchanged.
-- [ ] SSH: WSL bridge to the Windows 1Password agent (npiperelay + socat).
+- [x] SSH: WSL bridge to the Windows 1Password agent (npiperelay + socat) — relay in `dot_zprofile.tmpl`; prereqs below.
 - [ ] git credential helper: reuse the Windows GCM from WSL.
 
 ### Phase 2 — Windows native
@@ -67,6 +67,20 @@ scoped there.)
 - [ ] Gate Sourcetree difftool/mergetool (`/Applications/Sourcetree.app/...`)
   and `run_onchange_after_install-usr-local-bin.sh` (`sudo cp` to
   `/usr/local/bin`) to `darwin`.
+
+## WSL agent bridge (one-time setup)
+
+`dot_zprofile.tmpl` starts a `wsl`-gated `socat` relay that exposes the Windows
+1Password agent (named pipe `//./pipe/openssh-ssh-agent`) as a Unix socket at
+`~/.1password/agent.sock` — the `IdentityAgent`/`SSH_AUTH_SOCK` target. The relay
+self-starts on login if not already running. Prerequisites:
+
+- **Windows**: 1Password → Settings → Developer → enable "Use the SSH agent";
+  install `npiperelay.exe` on the Windows PATH (`winget install npiperelay`, or
+  scoop, or `GOOS=windows go build github.com/jstarks/npiperelay`).
+- **WSL**: `sudo apt install socat` (or `brew install socat`).
+
+Verify: open a new login shell, then `ssh-add -l` should list your 1Password keys.
 
 ## Subsystem reference
 

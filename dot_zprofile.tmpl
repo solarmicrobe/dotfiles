@@ -1,6 +1,19 @@
+{{- $platform := includeTemplate "platform" . | trim -}}
 # Created by `pipx` on 2025-05-22 20:42:11
 export PATH="$PATH:$HOME/.local/bin"
 
 # Added by OrbStack: command-line tools and integration
 # This won't be added again if you remove it.
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+{{ if eq $platform "wsl" -}}
+# Bridge SSH auth to the Windows 1Password agent (see docs/windows-port.md).
+# Needs npiperelay.exe on the Windows PATH and socat in WSL.
+export SSH_AUTH_SOCK="$HOME/.1password/agent.sock"
+if command -v socat >/dev/null 2>&1 && command -v npiperelay.exe >/dev/null 2>&1; then
+  if ! pgrep -f 'npiperelay.exe.*openssh-ssh-agent' >/dev/null 2>&1; then
+    mkdir -p "$(dirname "$SSH_AUTH_SOCK")"
+    rm -f "$SSH_AUTH_SOCK"
+    (setsid socat UNIX-LISTEN:"$SSH_AUTH_SOCK",fork EXEC:'npiperelay.exe -ei -s //./pipe/openssh-ssh-agent',nofork >/dev/null 2>&1 &)
+  fi
+fi
+{{ end -}}
