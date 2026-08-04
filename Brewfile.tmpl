@@ -1,6 +1,6 @@
 brew "chezmoi"
 # Brew/Bundle requirements
-{{- if or (eq .chassisType "desktop") (eq .chassisType "laptop") }}
+{{- if and (eq .chezmoi.os "darwin") (or (eq .chassisType "desktop") (eq .chassisType "laptop")) }}
 brew "mas"
 {{- end }}
 
@@ -16,7 +16,7 @@ brew "nvm"
 brew "pscale"
 brew "terraform"
 brew "vitess"
-{{- if or (eq .chassisType "desktop") (eq .chassisType "laptop") }}
+{{- if and (eq .chezmoi.os "darwin") (or (eq .chassisType "desktop") (eq .chassisType "laptop")) }}
 cask "beyond-compare"
 cask "devtoys"
 cask "dbeaver-community"
@@ -42,14 +42,16 @@ cask "hackintool"
 tap "noobaa/noobaa"
 brew "libvirt", restart_service: :changed
 brew "noobaa"
+{{- if eq .chezmoi.os "darwin" }}
 cask "codex"
 cask "codex-app"
+{{- end }}
 {{- else }}
 # This is not a personal machine
 {{- end }}
 
 # GUI only recepies
-{{- if or (eq .chassisType "desktop") (eq .chassisType "laptop") }}
+{{- if and (eq .chezmoi.os "darwin") (or (eq .chassisType "desktop") (eq .chassisType "laptop")) }}
 brew "diskonaut"
 {{- if has "container-tools" .tags }}
 brew "dive"
@@ -76,11 +78,13 @@ mas "Slack", id: 803453959
 
 # Work only recepies
 {{- if or (eq .purpose "work" ) (eq .purpose "consulting" ) }}
+{{- if eq .chezmoi.os "darwin" }}
 
 cask "claude"
 cask "claude-code@latest"
 cask "dotnet-sdk@9"
 cask "manictime"
+{{- end }}
 brew "redocly-cli"
 {{- end }}
 
@@ -109,7 +113,9 @@ brew "tektoncd-cli"
 
 # Email client
 {{- if eq .emailClient "outlook" }}
+{{- if eq .chezmoi.os "darwin" }}
 mas "microsoft-outlook", id: 985367838
+{{- end }}
 {{- else if and (eq .chezmoi.os "darwin") (eq .emailClient "mail") }}
 # Using Mail
 {{- else if eq .emailClient "unmanaged" }}

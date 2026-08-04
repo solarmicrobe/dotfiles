@@ -5,4 +5,12 @@ export HOMEBREW_ACCEPT_EULA=Y
 # Brewfile hash: {{ includeTemplate "Brewfile.tmpl" . | sha256sum }}
 brew trust derailed/k9s microsoft/mssql-release planetscale/tap localstack/tap noobaa/noobaa solarmicrobe/old-versions microsoft/apm
 brew bundle --file={{ joinPath .chezmoi.homeDir "Brewfile" | quote }}
+{{ else if eq .chezmoi.os "linux" }}
+# Brewfile hash: {{ includeTemplate "Brewfile.tmpl" . | sha256sum }}
+# Linux/WSL: casks and mas are gated out of the Brewfile; formulae only via linuxbrew.
+if command -v brew >/dev/null 2>&1; then
+  brew bundle --file={{ joinPath .chezmoi.homeDir "Brewfile" | quote }}
+else
+  echo "linuxbrew not found; skipping brew bundle (install Homebrew or use apt)." >&2
+fi
 {{ end }}

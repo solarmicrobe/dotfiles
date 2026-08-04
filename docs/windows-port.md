@@ -43,8 +43,12 @@ scoped there.)
 
 ### Phase 1 — WSL
 - [x] Add derived `platform` (as `.chezmoitemplates/platform` partial, used via `includeTemplate "platform" . | trim` — avoids the re-init a data var would need).
-- [ ] Linux/WSL package path — `brew bundle` is currently `darwin`-gated, so
-  WSL/Linux install **nothing**. Use linuxbrew or apt; strip casks / `mas`.
+- [x] Linux/WSL package path — `cask`/`mas`/mac-only formulae gated to `darwin`
+  in `Brewfile.tmpl`; `run_once…packages` runs `brew bundle` via linuxbrew on
+  `linux`. Mac render verified byte-identical. **Verify on real WSL:** linux
+  bottles for `microsoft/apm`, `mssql-tools`, `noobaa`; `dive`/`diskonaut` are
+  mac-only for now (left in the darwin GUI block) — promote to the cross-platform
+  section if WSL needs them.
 - [x] SSH: template `IdentityAgent` per platform (macos socket / windows pipe / wsl bridge sock / linux none). macOS render verified unchanged.
 - [x] SSH: WSL bridge to the Windows 1Password agent (npiperelay + socat) — relay in `dot_zprofile.tmpl`; prereqs below.
 - [ ] git credential helper: reuse the Windows GCM from WSL.
