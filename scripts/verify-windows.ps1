@@ -1,4 +1,4 @@
-# Verify Windows-native cross-platform dotfiles support (branch: feature/wsl-support).
+# Verify Windows-native cross-platform dotfiles support (branch: feature/cross-platform).
 #
 # Read-only checks only. Run in PowerShell after `chezmoi apply`, from the
 # chezmoi source dir (`chezmoi source-path`):

@@ -83,4 +83,4 @@ curl -sS https://downloads.1password.com/linux/keys/1password.asc | \
 chezmoi init solarmicrobe/dotfiles
 ```
 
-On the `feature/wsl-support` branch, verify the setup with `bash scripts/verify-wsl.sh` (plan + prereqs in [docs/windows-port.md](docs/windows-port.md)).
+On the `feature/cross-platform` branch, verify the setup with `bash scripts/verify-wsl.sh` (plan + prereqs in [docs/windows-port.md](docs/windows-port.md)).

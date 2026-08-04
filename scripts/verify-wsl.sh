@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Verify the WSL cross-platform dotfiles support (branch: feature/wsl-support).
+# Verify the WSL cross-platform dotfiles support (branch: feature/cross-platform).
 #
 # Read-only checks only — safe to run repeatedly. Run INSIDE WSL, after
 # `chezmoi apply`, from the chezmoi source dir (`chezmoi source-path`):
