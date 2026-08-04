@@ -86,6 +86,26 @@ self-starts on login if not already running. Prerequisites:
 
 Verify: open a new login shell, then `ssh-add -l` should list your 1Password keys.
 
+## WSL verification (for a future WSL session)
+
+After `chezmoi apply` on a WSL box, verify this branch end-to-end from the
+chezmoi source dir (`chezmoi source-path`):
+
+```bash
+bash scripts/verify-wsl.sh
+```
+
+Read-only checks: WSL detection, `platform` partial → `wsl`, `socat` +
+`npiperelay.exe` present, ssh-config bridge `IdentityAgent`, bridge socket +
+`ssh-add -l` reachability, `chezmoi apply --dry-run` (1Password paths resolve),
+and linuxbrew presence. Prints PASS/WARN/FAIL with remediation; exits non-zero
+on any hard FAIL. (`scripts/verify-wsl.sh` is `.chezmoiignore`d — repo-only,
+never deployed to `~`.)
+
+**Definition of done (safe to merge to master):** `verify-wsl.sh` exits 0,
+`brew bundle --file ~/Brewfile` completes, and a git push in a
+rezzell/solarmicrobe repo authenticates through the bridged 1Password agent.
+
 ## Subsystem reference
 
 | Area | macOS (today) | WSL | Windows native |
