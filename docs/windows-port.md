@@ -16,7 +16,7 @@ branch is merged** — the verify scripts are the merge gate.
 
 On a fresh WSL or Windows box:
 
-1. `chezmoi init solarmicrobe/dotfiles` (clones `master`), then pull this branch:
+1. `chezmoi init solarmicrobe/dotfiles` (clones `main`), then pull this branch:
    `cd $(chezmoi source-path) && git fetch origin && git checkout feature/cross-platform`
 2. Do the one-time platform prereqs (see the platform sections below): WSL →
    `npiperelay.exe` on the Windows PATH + `socat` + 1Password "Use the SSH agent";
@@ -25,7 +25,7 @@ On a fresh WSL or Windows box:
 4. Verify (read-only, PASS/WARN/FAIL): WSL → `bash scripts/verify-wsl.sh`;
    Windows → `pwsh scripts/verify-windows.ps1`.
 5. When verify passes AND `brew bundle` (WSL) / `winget import` (Windows) succeed,
-   merge `feature/cross-platform` → `master`.
+   merge `feature/cross-platform` → `main`.
 
 > The agent's working memory of this effort is machine-local to the original
 > laptop; **this doc + the two verify scripts are the cross-machine handoff.**
@@ -136,7 +136,7 @@ and linuxbrew presence. Prints PASS/WARN/FAIL with remediation; exits non-zero
 on any hard FAIL. (`scripts/verify-wsl.sh` is `.chezmoiignore`d — repo-only,
 never deployed to `~`.)
 
-**Definition of done (safe to merge to master):** `verify-wsl.sh` exits 0,
+**Definition of done (safe to merge to main):** `verify-wsl.sh` exits 0,
 `brew bundle --file ~/Brewfile` completes, and a git push in a
 rezzell/solarmicrobe repo authenticates through the bridged 1Password agent.
 
