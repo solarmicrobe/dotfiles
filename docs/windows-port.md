@@ -7,6 +7,29 @@ today (Homebrew, `/Users/...` paths, mac-only 1Password agent socket).
 > This file is repo-only documentation — `.chezmoiignore` excludes `docs/` so
 > chezmoi never deploys it to the home directory.
 
+## Resuming on another machine (WSL / Windows)
+
+**Status:** Phases 0–2 implemented on branch `feature/cross-platform`; Phase 3
+(git credential helper) on `feature/git-credential-helper`. macOS is
+regression-verified; **nothing is tested on real WSL/Windows yet, and neither
+branch is merged** — the verify scripts are the merge gate.
+
+On a fresh WSL or Windows box:
+
+1. `chezmoi init solarmicrobe/dotfiles` (clones `master`), then pull this branch:
+   `cd $(chezmoi source-path) && git fetch origin && git checkout feature/cross-platform`
+2. Do the one-time platform prereqs (see the platform sections below): WSL →
+   `npiperelay.exe` on the Windows PATH + `socat` + 1Password "Use the SSH agent";
+   Windows → winget + 1Password SSH agent.
+3. `chezmoi apply`
+4. Verify (read-only, PASS/WARN/FAIL): WSL → `bash scripts/verify-wsl.sh`;
+   Windows → `pwsh scripts/verify-windows.ps1`.
+5. When verify passes AND `brew bundle` (WSL) / `winget import` (Windows) succeed,
+   merge `feature/cross-platform` → `master`.
+
+> The agent's working memory of this effort is machine-local to the original
+> laptop; **this doc + the two verify scripts are the cross-machine handoff.**
+
 ## Decisions (2026-08-03)
 
 | Decision | Choice | Why |
