@@ -15,6 +15,7 @@ render_scenario() {
   mkdir -p "$dir"
 
   chezmoi execute-template --override-data "$data" --file AGENTS.md.tmpl > "$dir/home-AGENTS.md"
+  chezmoi execute-template --override-data "$data" --file CLAUDE.md.tmpl > "$dir/home-CLAUDE.md"
   chezmoi execute-template --override-data "$data" --file dot_codex/AGENTS.md.tmpl > "$dir/codex-AGENTS.md"
   chezmoi execute-template --override-data "$data" --file dot_claude/CLAUDE.md.tmpl > "$dir/claude-CLAUDE.md"
 
@@ -32,6 +33,32 @@ render_scenario() {
       return 1
     fi
   done
+
+  for rendered in "$dir"/*AGENTS.md; do
+    grep -q "## Codex-Specific Rules" "$rendered"
+    if grep -Eq "## Claude-Specific Rules|Promotion Tracking" "$rendered"; then
+      echo "Claude-only rules leaked into Codex file $rendered" >&2
+      return 1
+    fi
+  done
+
+  for rendered in "$dir"/*CLAUDE.md; do
+    grep -q "## Claude-Specific Rules" "$rendered"
+    if grep -Eq "## Codex-Specific Rules|github-cli-sandbox" "$rendered"; then
+      echo "Codex-only rules leaked into Claude file $rendered" >&2
+      return 1
+    fi
+  done
+
+  if [[ "$name" == "work" ]]; then
+    grep -q "Promotion Tracking" "$dir/home-CLAUDE.md"
+    grep -q "Promotion Tracking" "$dir/claude-CLAUDE.md"
+  else
+    if grep -q "Promotion Tracking" "$dir"/*CLAUDE.md; then
+      echo "Work-only promotion rules leaked into non-work Claude files" >&2
+      return 1
+    fi
+  fi
 }
 
 render_scenario "personal" '{"purpose":"personal"}'
