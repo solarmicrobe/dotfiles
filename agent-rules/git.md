@@ -4,6 +4,7 @@ Use when creating branches, writing commit messages, preparing changes to check 
 
 ## Do
 
+- Run GitHub CLI commands that depend on authentication or network state outside the sandbox in Codex. On this machine, sandboxed `gh` can report stale or invalid auth even when the real environment is authenticated.
 - Default to Conventional Commits and conventional branch names unless a closer authority overrides them. Authority order: repo-local policy, then company or package policy, then user default.
 - Use Conventional Commits by default: `type(scope): summary` when a scope helps, otherwise `type: summary`.
 - Treat AI-facing docs as source when they define agent behavior, skills, prompts, evals, tool contracts, routing, memory behavior, or workflow policy. Do not classify those changes as docs-only just because the files are Markdown.

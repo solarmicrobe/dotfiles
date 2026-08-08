@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitHub CLI Sandbox"
+  short_description: "Run authenticated gh outside sandbox."
+  default_prompt: "Use $github-cli-sandbox before running authenticated GitHub CLI commands."
