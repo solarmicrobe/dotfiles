@@ -4,8 +4,9 @@ Use when creating branches, writing commit messages, preparing changes to check 
 
 ## Do
 
+- Default to Conventional Commits and conventional branch names unless a closer authority overrides them. Authority order: repo-local policy, then company or package policy, then user default.
 - Use Conventional Commits by default: `type(scope): summary` when a scope helps, otherwise `type: summary`.
-- Treat skills, prompts, evals, tool contracts, and agent-behavior Markdown as source code for commit typing when the change alters behavior.
+- Treat AI-facing docs as source when they define agent behavior, skills, prompts, evals, tool contracts, routing, memory behavior, or workflow policy. Do not classify those changes as docs-only just because the files are Markdown.
 - Use conventional branch names by default: `type/short-kebab-summary`.
 - Reuse the standard commit types for branches when they fit: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `build`, `ci`, `perf`.
 - Follow repository-local conventions when a repo explicitly requires a different branch or commit scheme.
@@ -22,3 +23,4 @@ Use when creating branches, writing commit messages, preparing changes to check 
 - The proposed branch name when creating a branch.
 - The proposed commit message when preparing a commit.
 - Any repository-specific rule that overrides these defaults.
+- Any explicit operator instruction that intentionally diverges from repo-local or company/package git policy.
