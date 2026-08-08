@@ -2,3 +2,6 @@
 
 These rules apply only when a Codex instruction file is loaded. Keep provider-neutral personal behavior in
 `~/.local/share/chezmoi/.chezmoitemplates/personal-rules.md.tmpl`.
+
+- Use `$github-cli-sandbox` before authenticated or networked GitHub CLI work. On this machine, sandboxed `gh`
+  commands can report stale or invalid auth even when the real environment is authenticated.
