@@ -145,31 +145,6 @@ When drafting, editing, generating, or preparing to publish creative content, lo
 and follow its AIL disclosure rules. Before publishing, sending, posting, submitting, or packaging final creative
 work with an AIL disclosure, ask the user to confirm they agree with the proposed level and wording. Do not infer
 approval from silence.
-{{ if eq .purpose "work" }}
-## 9. Promotion Tracking — Lazy Load
-
-Russell is tracking promotion readiness (Senior GP3 → Staff GP4 / Lead MG1). Working
-files live at `~/Documents/promotion/`.
-
-**Load `~/Documents/promotion/CLAUDE.md` when ANY of these fire:**
-
-- User explicitly mentions promo / promotion / Staff / Lead / Manager / review cycle / 1:1 prep / brag doc.
-- User asks "what's my promo status", "ready for Staff", "log this for promotion", "where do I stand".
-- User says "log this" / "track this" in context of work that just happened.
-- Activity signals appear in conversation, EVEN UNPROMPTED — proactively offer to log:
-  - Design doc written, architecture decision made, cross-team API contract changed (criterion 2/3).
-  - Mentoring moment, onboarded a peer, taught via code review (criterion 6).
-  - Tech debt identified/paid down proactively (criterion 5).
-  - Tool/tech/process evaluated or introduced (criterion 4).
-  - Owned an epic end-to-end (criterion 1).
-  - Coordinated daily team activity, gave teammate feedback, covered lead duties (mgmt).
-
-On load, follow the routing in that file (criteria 1–6 → `se-log.md`, mgmt → `mgmt-log.md`).
-For right-leveling questions, also load `~/Documents/promotion/reference/se-track.md` and/or
-`sem-track.md` (all-levels detail).
-
-Do NOT load these files for unrelated work — silent background otherwise.
-{{- end }}
 
 ## Loading Rules — `~/agent-rules/` Modules
 
