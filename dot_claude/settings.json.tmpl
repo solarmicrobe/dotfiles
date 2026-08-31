@@ -23,7 +23,19 @@
   "statusLine": {
     "type": "command",
     "command": "bash \"{{ .chezmoi.homeDir }}/.claude/plugins/cache/caveman/caveman/c2ed24b3e5d4/hooks/caveman-statusline.sh\""
-  },
+  },{{ if eq .purpose "work" }}
+  "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"{{ .chezmoi.homeDir }}/.claude/hooks/tmux-notify.sh\""
+          }
+        ]
+      }
+    ]
+  },{{ end }}
   "enabledPlugins": {
     "caveman@caveman": true,
     "warp@claude-code-warp": true
