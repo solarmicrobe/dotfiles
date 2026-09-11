@@ -15,6 +15,7 @@ Use when editing prompts, evals, tool contracts, model routing, memory behavior,
 - Prefer the smallest context that can support the task; summarize bulky material once the relevant facts are captured.
 - Distinguish persistent memory, retrieved context, and turn-local working state before changing behavior.
 - State expected behavior changes, cost or latency impact, and any fallback path explicitly.
+- When guide content must stay in sync, identify the source of truth before editing and update generated or referenced copies only as needed.
 
 ## Avoid
 
@@ -23,6 +24,7 @@ Use when editing prompts, evals, tool contracts, model routing, memory behavior,
 - Storing noisy, sensitive, or weak-signal information in persistent memory without need.
 - Claiming an agent behavior fix without an eval, trace, or reproducible before/after check.
 - Promoting guidance to a broader layer before it has repeated across contexts and can be stated without private or repo-specific facts.
+- Duplicating full rules across rendered targets when a template, module, or profile can own the behavior.
 
 ## Surface
 

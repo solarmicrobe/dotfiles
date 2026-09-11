@@ -4,7 +4,9 @@
 > Source: `~/.local/share/chezmoi/.chezmoitemplates/personal-rules.md.tmpl`. Edit there; `chezmoi apply` syncs all targets.
 > Loads every session, every cwd.
 
-Keep active context small. Read this file first, then load only the relevant module under `~/agent-rules/` for the current task. Do not load all rule modules by default.
+Keep active context small. Read this file first. Do not load all `~/agent-rules/` modules. For substantive work,
+load `~/agent-rules/core.md` and only the task-triggered modules below. For trivial requests, stay in this file
+unless a stronger trigger applies.
 
 ## Public Content Boundary
 
@@ -14,159 +16,28 @@ When the user asks to extract public-safe consulting content from W2, client, or
 `~/agent-rules/profiles/public-content.md`; that profile routes the required on-demand skills. Public content must
 generalize the pattern without exposing proprietary implementation details, and employment agreements, client
 contracts, NDAs, policies, and legal obligations take precedence.
+The profile routes `public-content-extractor.md`, `confidentiality-guardian.md`, `thought-leadership-editor.md`, and
+`research-agenda-manager.md` as needed.
 
-Available on-demand public-content skills:
-- `public-content-extractor.md`: extract generalized, public-safe engineering lessons from explicit source material.
-- `confidentiality-guardian.md`: required before any source-derived idea advances toward public drafting.
-- `thought-leadership-editor.md`: develop approved ideas into consulting website, LinkedIn, talk, or newsletter drafts.
-- `research-agenda-manager.md`: prioritize research and publishing themes around the consulting body of work.
+## Source Of Truth
 
-## 1. Think Before Coding
+Shared agent behavior belongs in this template. Specialized behavior belongs in `~/agent-rules/*.md` or the relevant
+profile under `~/agent-rules/profiles/`. Do not duplicate full rules across rendered targets. After changing shared
+instructions, verify the rendered targets or explain why rendering was not run.
 
-**Don't assume. Don't hide confusion. Surface tradeoffs.**
+When a task points at guides, references, specs, manuals, or project-local instructions, load the smallest useful slice
+and expand only when the task proves it needs more.
 
-Before implementing:
-- State your assumptions explicitly. If uncertain, ask.
-- If multiple interpretations exist, present them - don't pick silently.
-- If a simpler approach exists, say so. Push back when warranted.
-- If something is unclear, stop. Name what's confusing. Ask.
+For creative work, drafting, publishing, or prose intended for humans, load `~/agent-rules/writing.md` and follow its
+AIL disclosure rules.
 
-## 2. Simplicity First
+For durable artifacts such as tickets, specs, plans, PRs, or non-ephemeral docs, load `~/agent-rules/planning.md` and
+use its workflow-skill routing guidance.
 
-**Minimum code that solves the problem. Nothing speculative.**
+## Module Triggers
 
-- No features beyond what was asked.
-- No abstractions for single-use code.
-- No "flexibility" or "configurability" that wasn't requested.
-- No error handling for impossible scenarios.
-- If you write 200 lines and it could be 50, rewrite it.
-
-Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
-
-## 3. Surgical Changes
-
-**Touch only what you must. Clean up only your own mess.**
-
-When editing existing code:
-- Don't "improve" adjacent code, comments, or formatting.
-- Don't refactor things that aren't broken.
-- Match existing style, even if you'd do it differently.
-- If you notice unrelated dead code, mention it - don't delete it.
-
-When your changes create orphans:
-- Remove imports/variables/functions that YOUR changes made unused.
-- Don't remove pre-existing dead code unless asked.
-
-The test: Every changed line should trace directly to the user's request.
-
-## 4. Goal-Driven Execution
-
-**Define success criteria. Loop until verified.**
-
-Transform tasks into verifiable goals:
-- "Add validation" → "Write tests for invalid inputs, then make them pass"
-- "Fix the bug" → "Write a test that reproduces it, then make it pass"
-- "Refactor X" → "Ensure tests pass before and after"
-
-For multi-step tasks, state a brief plan:
-```
-1. [Step] → verify: [check]
-2. [Step] → verify: [check]
-3. [Step] → verify: [check]
-```
-
-Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
-
-## 5. Deferred Work — TODO File
-
-**Capture "do later" items so they don't drop on the floor.**
-
-Quarterly file: `~/Documents/todo-YYYY-Q[1-4].md` (resolve current quarter from today's date). Schema documented at top of file. Use for follow-ups that don't warrant a Jira ticket — personal, local, ad-hoc work, or things surfaced mid-task but out of current scope.
-
-When to add an entry:
-- Non-blocking issue surfaces mid-task, out of scope for current change.
-- Cleanup, experiment, or investigation worth remembering but not doing now.
-- Anything you'd otherwise say "I'll get to that later" about.
-
-Entry rules:
-- The **Prompt** block must be self-contained — include PR/ticket URLs, file paths, expected outputs, and any context needed to resume cold. Future sessions won't have current chat.
-- On completion: fill **Evidence** (PR URLs, Jira keys, commit SHAs, outputs, impact summary) before flipping Status to `done <YYYY-MM-DD>`. Never delete done entries — they're the record.
-- Items spanning quarters stay in their originating file; only completion date moves forward.
-
-At session start, check whether `~/Documents/todo-*.md` exists. If it does, scan only open-item metadata
-(`Status`, `Conditions`, short title) to find items whose **Conditions** may now be met by current state
-(e.g., "PRs #28/#29/#30 merged"). Load full `Prompt` / `Evidence` bodies only when an open item's
-conditions match the current task or need verification, then surface it as a candidate before diving into new work.
-
-## 6. Evidence Storage — Durable Artifacts Folder
-
-**Screenshots, comparisons, and generated proof belong in `~/Documents/session-scratchpad/<identifier>/`, not the ephemeral session scratchpad.** That scratchpad is session/worktree-scoped and gets torn down; evidence backing a PR, decision, or investigation needs to outlive the session.
-
-- `<identifier>` = the stable handle for what the evidence supports: a PR number (`PR-610`), a ticket key (`VD-380`), or a short concept slug when neither exists yet (`button-disabled-audit`).
-- Default: accumulate evidence for the CURRENT session's work into that folder as you generate it (screenshots, before/after comparisons, audit exports) — don't leave it stranded in scratchpad only to be discarded.
-- Across sessions: folders don't auto-continue by default. If a later session should keep adding to an existing evidence folder, say so explicitly and name the folder/identifier to resume into.
-- One folder per identifier. If the identifier is ambiguous (e.g. one investigation spanning multiple PRs), ask which one owns the evidence rather than guessing.
-
-## 7. Proactive Skill Suggestion
-
-**Surface the matching workflow skill before drifting into ad-hoc artifact creation.**
-
-When an ad-hoc conversation transitions from understanding/research into creating durable artifacts (Jira tickets,
-specs, plans, PRs, non-ephemeral docs), pause and offer the matching workflow skill before proceeding ad-hoc.
-
-Trigger phrases:
-- "we need a ticket for X" / "draft the tickets" / "file this as a story"
-- "create the AC for this" / "let's plan Y"
-- "should be its own story" / "shape this into a ticket"
-
-Skills (`/brainstorm`, `/plan`, `/implement`, `/review`, `/pr-feedback`, `/merge-pr`, `/skill-up`) carry
-story-wellformedness audits, structured Socratic questioning, and gate sequencing that ad-hoc drafting lacks. Cost
-of missing the trigger: multi-round ticket revision the skill's audit would catch in one pass.
-
-Pause-and-offer pattern: *"This looks like /brainstorm territory — want me to run it, or continue ad-hoc?"* User
-accepts or declines; don't force-route. Don't pause when the artifact is ephemeral (a single chat reply, a one-line
- diff, scratch math) — only when output is durable and consumed downstream.
-
-## 8. Progressive Disclosure — Guides and References
-
-**Load the smallest useful slice, then expand only when the task proves it needs more.**
-
-When a task points at guides, references, specs, manuals, or project-local instructions:
-- Start with the local entry point: `AGENTS.md`, `CLAUDE.md`, `README`, index, table of contents, or the smallest file that routes the work.
-- Prefer search, headings, summaries, and referenced sections over reading whole guide trees.
-- Load a referenced file only when it directly changes the next decision or verification step.
-- Stop loading once the next safe action is clear. Summarize the facts that matter instead of keeping bulky raw context active.
-- If two guides disagree, name the conflict and prefer the closest project-local or explicitly canonical source. Ask when the safer choice is not obvious.
-- Do not copy broad guide content into prompts, tickets, or generated docs unless the user asked for that artifact to contain it.
-
-When guide content must stay in sync:
-- Identify the source of truth before editing. Shared agent behavior belongs in this template; specialized behavior belongs in the relevant `~/agent-rules/` module.
-- Do not duplicate a rule across multiple generated targets when a template or module can own it.
-- If a rule already exists in multiple places, update the canonical source and the necessary generated or referenced copies in the same change.
-- After changing shared instructions, verify the rendered targets or explain why rendering was not run.
-- If a sync cleanup is useful but out of scope, add a self-contained TODO entry instead of doing opportunistic cleanup.
-
-## 9. Creative Content — AIL Lazy Load
-
-**For creative works, load the detailed AIL rules only when the task needs them.**
-
-When drafting, editing, generating, or preparing to publish creative content, load `~/agent-rules/writing.md`
-and follow its AIL disclosure rules. Before publishing, sending, posting, submitting, or packaging final creative
-work with an AIL disclosure, ask the user to confirm they agree with the proposed level and wording. Do not infer
-approval from silence.
-
-## Loading Rules — `~/agent-rules/` Modules
-
-- Do not load every file in `~/agent-rules/` by default.
-- For trivial requests, stay in this file unless a stronger trigger applies.
-- For substantive work in a repository, check for project-local instructions before relying only on these home-level rules.
-- For substantive work, read `~/agent-rules/core.md` first, then only the task-relevant modules.
-- Prefer summaries over raw file dumps once relevant facts are captured.
-- Stop loading more context when you have enough to act safely.
-- If multiple modules could apply, load the smallest set that fully covers the task.
-- Prefer existing installed skills for heavier workflows (deep planning, structured debugging, specialized tool use).
-
-### Task Triggers
+Inspect repository state before review or implementation work when a repository is present. Check pending files and
+diffs first so the active scope is based on the actual worktree.
 
 Load `~/agent-rules/coding.md` when editing code, tests, config, schemas, migrations, or build scripts.
 
@@ -195,5 +66,3 @@ Load `~/agent-rules/reviewing.md` when asked to review code, plans, docs, or cha
 Load `~/agent-rules/git.md` when creating branches, writing commit messages, preparing changes to check in, or interpreting repository branch and commit naming conventions.
 
 Load `~/agent-rules/tooling.md` when choosing tools, setting up automation, adding integrations, or making environment and dependency decisions.
-
-Inspect repository state before review or implementation work when a repository is present. Check pending files and diffs first so the active scope is based on the actual worktree.

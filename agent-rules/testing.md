@@ -9,6 +9,7 @@ Use when adding or changing tests, evaluating CI failures, choosing verification
 - Match verification scope to risk: narrow checks first, broader checks when the blast radius is larger.
 - Distinguish local proof, CI proof, and unverified assumptions.
 - Preserve failing signals and reproduction details when they help future debugging.
+- For bug fixes, prefer a test or concrete reproduction that fails before the fix and passes after.
 
 ## Avoid
 
