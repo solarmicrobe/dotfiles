@@ -7,7 +7,7 @@
 	excludesfile = ~/.gitignore_global
 {{- if eq .purpose "work" }}
     sshCommand = "ssh -i ~/.ssh/prepass_id_ed25519 -o IdentitiesOnly=yes"
-{{ end -}}
+{{ end }}
 [includeIf "gitdir:~/.local/share/chezmoi/"]
     path = ~/.gitconfig-chezmoi
 {{ if or (eq .purpose "personal") (eq .purpose "consulting") -}}
@@ -15,6 +15,8 @@
     path = ~/.gitconfig-solarmicrobe
 [includeIf "gitdir:~/src/rezzell/"]
     path = ~/.gitconfig-rezzell
+[includeIf "gitdir:~/src/russell-parks/"]
+    path = ~/.gitconfig-russell-parks
 [includeIf "gitdir:~/src/bitbucket.org/microbial/"]
     path = ~/.gitconfig-microbial
 {{ end -}}

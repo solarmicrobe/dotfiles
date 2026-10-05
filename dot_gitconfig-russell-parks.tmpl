@@ -1,0 +1,5 @@
+[user]
+    name = {{ onepasswordRead "op://Rezzell/Rezzell-Identity/Identification/first name" }} {{ onepasswordRead "op://Rezzell/Rezzell-Identity/Identification/last name" }}
+    email = {{ onepasswordRead "op://Rezzell/Rezzell-Identity/Identification/email" }}
+[core]
+    sshCommand = "ssh -i ~/.ssh/russell-parks-github -o IdentitiesOnly=yes"
